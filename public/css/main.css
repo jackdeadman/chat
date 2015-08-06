@@ -95,7 +95,7 @@ small {
 }
 
 .chat-container {
-  width: 800px;
+  width: 500px;
   margin: 50px auto;
   background-color: #fff;
 }
@@ -106,6 +106,10 @@ small {
 }
 .chat-container header .title {
   font-size: 1.2em;
+}
+.chat-container .messages {
+  height: 400px;
+  overflow-y: scroll;
 }
 .chat-container .messages .message {
   padding: 1em 3em;

@@ -1,6 +1,6 @@
 .chat-container {
 	
-	width: 800px;
+	width: 500px;
 	margin: 50px auto;
 	background-color: #fff;
 	
@@ -16,6 +16,8 @@
 	}
 	
 	.messages {
+		height: 400px;
+		overflow-y: scroll;
 		
 		.message {
 			padding: 1em 3em;
