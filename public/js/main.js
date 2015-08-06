@@ -1,3 +1,4 @@
+/* global io */
 document.addEventListener('DOMContentLoaded', init);
 
 
@@ -15,7 +16,16 @@ function init() {
 		if (e.keyCode == 13) {
 			var message = e.target.value;
 			e.target.value = '';
-			addMessage(message);
+			socket.emit('newMessage', message);
 		}
 	});
 }
+
+var socket = io();
+socket.on('newUser', function() {
+	addMessage('New user connected');
+});
+
+socket.on('newMessage', function(msg) {
+	addMessage(msg);
+});
