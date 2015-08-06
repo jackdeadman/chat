@@ -1,0 +1,19 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "Real time chat system for computer scientists",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [
+    "chat",
+    "realtime",
+    "compsci"
+  ],
+  "author": "Jack Deadman",
+  "license": "MIT",
+  "dependencies": {
+    "jasmine": "^2.3.2"
+  }
+}
