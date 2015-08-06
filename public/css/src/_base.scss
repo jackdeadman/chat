@@ -1,0 +1,36 @@
+body {
+	color: $font-color;
+	font-family: $font;
+}
+
+h1, .h1 {
+	font-size: $h1-font-size;
+}
+
+h2, .h2 {
+	font-size: $h2-font-size;
+}
+
+h3, .h3 {
+	font-size: $h3-font-size;
+}
+
+h4, .h4 {
+	font-size: $h4-font-size;
+}
+
+blockquote {
+	font-size: $blockquote-font-size;
+}
+
+p {
+	font-size: $p-font-size;
+}
+
+input {
+	font-size: $input-font-size;
+}
+
+small {
+	font-size: $small-font-size;
+}
