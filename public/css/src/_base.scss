@@ -1,6 +1,11 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
 	color: $font-color;
 	font-family: $font;
+	background-color: $background-color;
 }
 
 h1, .h1 {
