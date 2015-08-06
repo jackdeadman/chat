@@ -8,6 +8,7 @@ function addMessage(str) {
 	message.innerHTML = str;
 	message.className = "message msg-sender";
 	messages.appendChild(message);
+	messages.scrollTop = messages.scrollHeight;
 }
 
 function init() {
