@@ -14,6 +14,8 @@
   "author": "Jack Deadman",
   "license": "MIT",
   "dependencies": {
-    "jasmine": "^2.3.2"
+    "express": "^4.13.3",
+    "jasmine": "^2.3.2",
+    "socket.io": "^1.3.6"
   }
 }
