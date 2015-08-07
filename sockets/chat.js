@@ -1,5 +1,5 @@
 var chat = require('../lib/chat.js');
-
+var Message = require('../lib/message');
 
 module.exports = function(io) {
 	
@@ -14,10 +14,14 @@ module.exports = function(io) {
 		socket.broadcast.emit('newUser');
 		console.log('user connected');
 		
-		socket.on('newMessage', function(msg) {
+		socket.on('newMessage', function(msgString) {
+
+			var msg = new Message(msgString);
+			chat.parseMsg(msg);
 			
 			if (chat.isValidMessage(msg)) {
-				io.emit("newMessage", chat.parseMsg(msg));				
+				msg.types = Message.MessageType;
+				io.emit("newMessage", msg);
 			}
 
 		});
@@ -41,7 +45,7 @@ module.exports = function(io) {
 					socket.store.isTyping = false;
 				},1000);
 			}
-			
+
 		});
 		
 		

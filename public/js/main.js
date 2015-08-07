@@ -31,9 +31,20 @@ function init() {
 }
 
 
+function addImage(src) {
+	var messages = document.querySelector('.messages');
+	var message = document.createElement('li');
+	message.innerHTML = '<img src="'+src+'"/>';
+	messages.appendChild(message);
+}
+
 
 socket.on('newMessage', function(msg) {
-	addMessage(msg);
+	if (msg.type === msg.types.TEXT) {
+		addMessage(msg.text);
+	} else if(msg.type === msg.types.IMAGE) {
+		addImage(msg.value);
+	}
 });
 
 var typing = false;
