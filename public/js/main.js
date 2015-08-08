@@ -1,61 +1,107 @@
-/* global io */
-document.addEventListener('DOMContentLoaded', init);
+/* global App */
+/* global DOM */
 
+var user = {
+	hash: "jdnjksnmNJJbh437bhj"	
+};
 
-function addMessage(str) {
-	var messages = document.querySelector('.messages');
-	var message = document.createElement('li');
-	message.innerHTML = str;
-	message.className = "message msg-sender";
-	messages.appendChild(message);
-	messages.scrollTop = messages.scrollHeight;
-}
-
-var socket = io();
-socket.on('newUser', function() {
-	addMessage('New user connected');
-});
-
-function init() {
-	var input = document.querySelector('.chat-container .message-form');
-	input.addEventListener('keyup', function(e) {
-		
-		socket.emit('userTyping');
-		
-		if (e.keyCode == 13) {
-			var message = e.target.value;
-			e.target.value = '';
-			socket.emit('newMessage', message);
-		}
-	});
-}
-
-
-function addImage(src) {
-	var messages = document.querySelector('.messages');
-	var message = document.createElement('li');
-	message.innerHTML = '<img src="'+src+'"/>';
-	messages.appendChild(message);
-}
-
-
-socket.on('newMessage', function(msg) {
-	if (msg.type === msg.types.TEXT) {
-		addMessage(msg.text);
-	} else if(msg.type === msg.types.IMAGE) {
-		addImage(msg.value);
+App.Chat = (function(Api) {
+	'use strict';	
+	
+	var VERSION = '0.0.1';
+	
+	var _settings = {
+		chatId: "chatID",
+		initialMessageCount: 40,
+		loadMoreAmount: 10,
+		textMessageTemplate: '<li class="message">{{message}}</li>',
+		imageMessageTemplate: '<img class="" src="{{src}}">'
 	}
-});
+	
+	var client;
+	var room;
+	
+	// Cache DOM:
+	var $container = DOM('.chat-container');
+	var $messagesContainer = $container.find('.messages');
+	var $messageForm = $container.find('.message-form textarea');
 
-var typing = false;
+	// Private:
+	function _init() {
+		client = new Api(user.hash);
+		room = client.getRoom(_settings.id);
+		
+		if (client.hasPermission(room)) {
+			_bindEvents();
+			_displayInitialMessages();
+		} else {
+			console.log('You do no have permission');
+		}
+		
+	}
+	
+	function _bindEvents() {
+		// Socket Events
+		// io.on('userEntered', indicateNewUser);
+		
+		room.onNewMessage(function(message) {
+			_displayNewMessage(message.value);
+			$messagesContainer.elements[0].scrollTop = 200000;
+		});
 
-socket.on('userStartedTyping', function(){
-	var el = document.getElementById('user-typing');
-	el.innerHTML = 'User is typing';
-});
+		// io.on('userStartedTying', addTyper);
+		// io.on('userStoppedTyping', removeTyper);
+		
+		// DOM events
+		$messageForm.on('keydown', function(e) {
+			room.userIsTyping();
+			// Handle enter press
+			if (e.keyCode === 13) {
+				e.preventDefault();
+				sendMessage();
+			}
+		});
+	}
+	
+	function _createTextMessage(message) {
+		return DOM.renderTemplate(_settings.textMessageTemplate, { message: message });
+	}
+	
+	function _displayInitialMessages() {
+		var amount = _settings.initialMessageCount;
 
-socket.on('userStoppedTyping', function(){
-	console.log('stopped typing');
-	var el = document.getElementById('user-typing');
-	el.innerHTML = '';
-});
+		room.getMessages(amount, function(messages) {
+			for (var i = 0; i < messages.length; ++i) {
+				var message = messages[i];
+				_displayNewMessage(message.value);
+			}			
+		});
+	}
+	
+	function _displayNewMessage(message) {
+		var messageNode = _createTextMessage(message); 
+		$messagesContainer.append(messageNode);
+	}
+	
+	function _displayOldMessages(messages) {
+		// TODO
+	}
+	
+	// Public:
+	function sendMessage(message) {
+		if (typeof message === 'undefined') {
+			room.sendMessage($messageForm.value());
+			$messageForm.value('');	
+		} else {
+			room.sendMessage(message);	
+		}
+	}
+		
+	
+	_init();
+	return {
+		VERSION: VERSION,
+		sendMessage: sendMessage
+	}
+		
+})(App.Api);

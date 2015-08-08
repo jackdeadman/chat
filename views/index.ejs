@@ -12,11 +12,7 @@
 			<div class="title"><%= title %></div>
 		</header>
 		
-		<ul class="messages">
-			<li class="message msg-sender">Hello</li>
-			<li class="message msg-receiver">Hi, there</li>
-			<li class="message msg-sender">How are you?</li>
-		</ul>
+		<ul class="messages"></ul>
 		<div id="user-typing"></div>
 		<div class="message-form">
 			<textarea name="message" cols="30" rows="5"></textarea>
@@ -24,6 +20,8 @@
 		
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="js/dom.min.js"></script>
+	<script type="text/javascript" src="js/api.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
