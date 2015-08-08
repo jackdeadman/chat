@@ -7,9 +7,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/api/messages/:count/:start', function(req, res) {
   res.send([
-    {value: "smkmskm"},
-    {value: "smkmskm"},
-    {value: "smkmskm"}
+    {value: 'smkmskm', type: 'text'},
+    {value: 'smkmskm', type: 'text'},
+    {value: 'smkmskm', type: 'text'}
     ]);
 });
 

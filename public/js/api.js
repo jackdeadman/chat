@@ -15,6 +15,12 @@ App.Api = (function() {
 		_connect();
 	}
 	
+	Api.messageType = {
+		IMAGE: 'image',
+		TEXT: 'text',
+		CODE: 'code'
+	}
+	
 	Api.prototype.getRoom = function (roomId) {
 		return new Room(roomId, this);
 	};

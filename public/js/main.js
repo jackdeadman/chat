@@ -45,8 +45,8 @@ App.Chat = (function(Api) {
 		// io.on('userEntered', indicateNewUser);
 		
 		room.onNewMessage(function(message) {
-			_displayNewMessage(message.value);
-			$messagesContainer.elements[0].scrollTop = 200000;
+			console.log(message);
+			_displayNewMessage(message);
 		});
 
 		// io.on('userStartedTying', addTyper);
@@ -67,19 +67,28 @@ App.Chat = (function(Api) {
 		return DOM.renderTemplate(_settings.textMessageTemplate, { message: message });
 	}
 	
+	function _createImageMessage(src) {
+		return DOM.renderTemplate(_settings.imageMessageTemplate, { src: src });
+	}
+	
 	function _displayInitialMessages() {
 		var amount = _settings.initialMessageCount;
 
 		room.getMessages(amount, function(messages) {
 			for (var i = 0; i < messages.length; ++i) {
 				var message = messages[i];
-				_displayNewMessage(message.value);
+				_displayNewMessage(message);
 			}			
 		});
 	}
 	
 	function _displayNewMessage(message) {
-		var messageNode = _createTextMessage(message); 
+		var messageNode;
+		if (message.type === Api.messageType.IMAGE) {
+			messageNode = _createImageMessage(message.value);
+		} else {
+			messageNode = _createTextMessage(message.value);
+		}
 		$messagesContainer.append(messageNode);
 	}
 	
