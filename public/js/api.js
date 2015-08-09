@@ -7,7 +7,7 @@ App.Api = (function() {
 	'use strict';
 	
 	Api.VERSION = '0.0.1';
-	var BASE_URL = '/api';
+	var BASE_URL = '/api/chat';
 	var _socket;
 	
 	function Api(user) {
@@ -39,7 +39,7 @@ App.Api = (function() {
 	Room.prototype.getMessages = function(count, callback, startIndex) {
 		if (typeof startIndex === 'undefined') startIndex = 0;
 		
-		var url = BASE_URL+'/messages/'+count+'/'+startIndex;
+		var url = BASE_URL+'/'+this.roomId+'/messages/'+count+'/'+startIndex;
 		
 		DOM.xhr({
 			src: url,
@@ -69,7 +69,11 @@ App.Api = (function() {
 		_socket.emit('userIsTyping', this.client.hash);	
 	};
 	
-	Room.prototype.sendMessage = function(message, callback) {
+	Room.prototype.sendMessage = function(messageString, callback) {
+		var message = {
+			messageString: messageString,
+			roomId: this.roomId
+		}
 		_socket.emit('newMessage', message);
 	}
 	

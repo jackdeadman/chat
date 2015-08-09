@@ -9,7 +9,12 @@ var debug = require('debug')('express:server');
 var http = require('http');
 var mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err) {
+  if (err) {
+    console.error('Failed to connect to Database.');
+    throw err;
+  }
+});
 
 /**
  * Get port from environment and store in Express.
