@@ -7,7 +7,8 @@ App.Chat = (function(Api, User) {
 	var VERSION = '0.0.1';
 	
 	var _settings = {
-		chatId: "chatID",
+		// Get id from url
+		chatId: location.href.match(/[^/]*$/)[0],
 		initialMessageCount: 40,
 		loadMoreAmount: 10,
 		textMessageTemplate: '<li class="message">{{message}}</li>',
@@ -27,8 +28,8 @@ App.Chat = (function(Api, User) {
 	function _init() {
 		currentUser = User.getUser();
 		client = new Api(currentUser);
-		room = client.getRoom(_settings.id);
-		
+		room = client.getRoom(_settings.chatId);
+		console.log(room);
 		if (client.hasPermission(room)) {
 			_bindEvents();
 			_displayInitialMessages();
@@ -44,6 +45,10 @@ App.Chat = (function(Api, User) {
 		
 		room.onNewMessage(function(message) {
 			_displayNewMessage(message);
+		});
+		
+		room.onMessageFail(function() {
+			console.error('Failed to send message.');
 		});
 		
 		// room.on('usersTyping', function(users) {

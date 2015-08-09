@@ -12,7 +12,8 @@ var Schema = mongoose.Schema;
 var MessageSchema = new Schema({
 	posted_by: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'User',
+		required: true
 	},
 	content: {
 		type: String,

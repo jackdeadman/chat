@@ -54,6 +54,11 @@ App.Api = (function() {
 			handle.call(this, message);
 		});
 	};
+	
+	Room.prototype.onMessageFail = function(handle) {
+		_socket.on('messageFail', handle);
+	};
+	
 	// Local user has stopped typing
 	Room.prototype.userHasStoppedTyping = function() {
 		_socket.emit('userStoppedTyping',this.client.user);
@@ -64,10 +69,9 @@ App.Api = (function() {
 		_socket.emit('userIsTyping', this.client.hash);	
 	};
 	
-	Room.prototype.sendMessage = function(message) {
+	Room.prototype.sendMessage = function(message, callback) {
 		_socket.emit('newMessage', message);
 	}
-	
 	
 	function _connect() {
 		// Open socket

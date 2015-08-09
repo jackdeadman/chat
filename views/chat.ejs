@@ -6,9 +6,19 @@
 	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-	
-	<a href="/chat">Load Chat</a>
-	
+	<div class="chat-container">
+		
+		<header>
+			<div class="title"><%= title %></div>
+		</header>
+		
+		<ul class="messages"></ul>
+		<div id="user-typing"></div>
+		<div class="message-form">
+			<textarea name="message" cols="30" rows="5"></textarea>
+		</div>
+		
+	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/dom.min.js"></script>
 	<script type="text/javascript" src="/js/js.cookie.js"></script>

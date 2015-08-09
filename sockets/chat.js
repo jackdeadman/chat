@@ -1,62 +1,42 @@
 var chat = require('../lib/chat.js');
-var Message = require('../lib/message');
-var Message1 = require('../models/message');
+var Message = require('../models/message');
 var mongoose = require('mongoose');
+var ChatUtil = require('../lib/chat');
 
-module.exports = function(io) {
+
+module.exports = function (io) {
 	
-	var typingCallback = function(socket) {
-		socket.broadcast.emit('userStoppedTyping');
-	};
+	function init() {
+		io.on('connection', function(socket) {
+			socket.broadcast.emit('newUser');
+			bindClientEvents(socket);
+		});
+	}
 	
-	io.on('connection', function(socket) {
-		socket.store = {};
-		
-		socket.broadcast.emit('newUser');
-		console.log('user connected');
-		
-		socket.on('newMessage', function(msgString) {
+	function bindClientEvents(socket) {
+		socket.on('newMessage', function(messageString) {
+			// if (!ChatUtil.isValidMessage(messageString)) return;
 			
-			var m = new Message1({
+			// messageString = ChatUtil.escapeMsg;
+			
+			// Save message
+			var message = new Message({
 				posted_by: new mongoose.Types.ObjectId('55c692819860d79db61bf81b'),
-    			content: msgString
+				content: messageString
 			});
-			m.save();
 			
-			io.emit('newMessage', m);
-			
-			// var msg = new Message(msgString);
-			// chat.parseMsg(msg);
-			
-			// if (chat.isValidMessage(msg)) {
-			// 	msg.types = Message.MessageType;
-			// 	io.emit("newMessage", msg);
-			// }
-
+			message.save(function(err) {
+				if (err) {
+					socket.emit('messageFail');
+				} else {
+					// Message successfully added, send to everyone
+					io.emit('newMessage', message);
+					// Tell the sender their message saved succesfully
+					socket.emit('messageSuccess');	
+				}
+			});
 		});
-		
-		socket.store.isTyping = false;
-		
-		socket.on('userTyping', function() {
-			socket.broadcast.emit('userStartedTyping');
-			
-			if (socket.store.isTyping) {
-				clearTimeout(socket.store.i);
-				socket.store.i = setTimeout(function() {
-					typingCallback(socket);
-					socket.store.isTyping = false;
-				},1000);
-			} else {
-				socket.store.isTyping = true;
-				socket.store.i = setTimeout(function() {
-					typingCallback(socket);
-					socket.store.isTyping = false;
-				},1000);
-			}
-
-		});
-		
-		
-	});
+	}
 	
-};
+	init();
+}
