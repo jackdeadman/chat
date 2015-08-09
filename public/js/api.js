@@ -10,8 +10,8 @@ App.Api = (function() {
 	var BASE_URL = '/api';
 	var _socket;
 	
-	function Api(userHash) {
-		this.hash = userHash;
+	function Api(user) {
+		this.user = user;
 		_connect();
 	}
 	
@@ -32,6 +32,7 @@ App.Api = (function() {
 	function Room(roomId, client) {
 		this.roomId = roomId;
 		this.client = client;
+		this.typingUsers = [];
 	}
 	
 	// Requests
@@ -53,6 +54,10 @@ App.Api = (function() {
 			handle.call(this, message);
 		});
 	};
+	// Local user has stopped typing
+	Room.prototype.userHasStoppedTyping = function() {
+		_socket.emit('userStoppedTyping',this.client.user);
+	}
 	
 	// Triggers
 	Room.prototype.userIsTyping = function() {

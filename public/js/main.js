@@ -1,11 +1,7 @@
 /* global App */
 /* global DOM */
 
-var user = {
-	hash: "jdnjksnmNJJbh437bhj"	
-};
-
-App.Chat = (function(Api) {
+App.Chat = (function(Api, User) {
 	'use strict';	
 	
 	var VERSION = '0.0.1';
@@ -20,6 +16,7 @@ App.Chat = (function(Api) {
 	
 	var client;
 	var room;
+	var currentUser;
 	
 	// Cache DOM:
 	var $container = DOM('.chat-container');
@@ -28,7 +25,8 @@ App.Chat = (function(Api) {
 
 	// Private:
 	function _init() {
-		client = new Api(user.hash);
+		currentUser = User.getUser();
+		client = new Api(currentUser);
 		room = client.getRoom(_settings.id);
 		
 		if (client.hasPermission(room)) {
@@ -45,9 +43,12 @@ App.Chat = (function(Api) {
 		// io.on('userEntered', indicateNewUser);
 		
 		room.onNewMessage(function(message) {
-			console.log(message);
 			_displayNewMessage(message);
 		});
+		
+		// room.on('usersTyping', function(users) {
+		// 	_displayTypingUsers();
+		// });
 
 		// io.on('userStartedTying', addTyper);
 		// io.on('userStoppedTyping', removeTyper);
@@ -64,7 +65,7 @@ App.Chat = (function(Api) {
 	}
 	
 	function _createTextMessage(message) {
-		return DOM.renderTemplate(_settings.textMessageTemplate, { message: message });
+		return DOM.renderTemplate(_settings.textMessageTemplate, { message: message.content });
 	}
 	
 	function _createImageMessage(src) {
@@ -87,9 +88,13 @@ App.Chat = (function(Api) {
 		if (message.type === Api.messageType.IMAGE) {
 			messageNode = _createImageMessage(message.value);
 		} else {
-			messageNode = _createTextMessage(message.value);
+			messageNode = _createTextMessage(message);
 		}
 		$messagesContainer.append(messageNode);
+	}
+	
+	function _displayTypingUsers(users) {
+		
 	}
 	
 	function _displayOldMessages(messages) {
@@ -113,4 +118,4 @@ App.Chat = (function(Api) {
 		sendMessage: sendMessage
 	}
 		
-})(App.Api);
+})(App.Api, App.User);

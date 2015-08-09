@@ -1,5 +1,7 @@
 var chat = require('../lib/chat.js');
 var Message = require('../lib/message');
+var Message1 = require('../models/message');
+var mongoose = require('mongoose');
 
 module.exports = function(io) {
 	
@@ -10,22 +12,28 @@ module.exports = function(io) {
 	io.on('connection', function(socket) {
 		socket.store = {};
 		
-		
 		socket.broadcast.emit('newUser');
 		console.log('user connected');
 		
 		socket.on('newMessage', function(msgString) {
-
-			var msg = new Message(msgString);
-			chat.parseMsg(msg);
 			
-			if (chat.isValidMessage(msg)) {
-				msg.types = Message.MessageType;
-				io.emit("newMessage", msg);
-			}
+			var m = new Message1({
+				posted_by: new mongoose.Types.ObjectId('55c692819860d79db61bf81b'),
+    			content: msgString
+			});
+			m.save();
+			
+			io.emit('newMessage', m);
+			
+			// var msg = new Message(msgString);
+			// chat.parseMsg(msg);
+			
+			// if (chat.isValidMessage(msg)) {
+			// 	msg.types = Message.MessageType;
+			// 	io.emit("newMessage", msg);
+			// }
 
 		});
-		
 		
 		socket.store.isTyping = false;
 		
