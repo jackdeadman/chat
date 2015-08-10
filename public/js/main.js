@@ -85,7 +85,7 @@ App.Chat = (function(Api, User) {
 			messageNode = _createTextMessage(message);
 		}
 		// what variable gets the length of the screen?
-		messageNode += "-------------------------------------------------------------------------------------------------\n";
+		//~ messageNode += "-------------------------------------------------------------------------------------------------\n";
 		$messagesContainer.append(messageNode);
 	}
 	
