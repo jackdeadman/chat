@@ -44,6 +44,7 @@ function cleanMessages(messages) {
 	for (var i=0; i<messages.length; i++) {
 		var message = messages[i];
 		message.sanatise();
+		message.renderLatex();
 		message.convertNewLines();	
 	}
 	
