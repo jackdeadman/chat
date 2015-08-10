@@ -49,7 +49,7 @@ App.Api = (function() {
 	// Triggers
 	
 	Room.prototype.enter = function(handle) {
-		_socket.emit('entered');
+		_socket.emit('entered', {roomId: this.roomId});
 	};
 	
 	Room.prototype.getMessages = function(start, amount, handle) {

@@ -1,9 +1,10 @@
 var chatController = require('./controllers/chat');
 
 function bindClient(io,socket) {
-	socket.on('entered', function() {
+	socket.on('entered', function(req) {
 		// Tell everyone else that someone has entered
-		socket.broadcast.emit('newUser');
+		socket.join(req.roomId);
+		socket.broadcast.to(req.roomId).emit('newUser');
 	});
 	
 	socket.on('requestMessages', function(req, handle) {

@@ -79,6 +79,6 @@ module.exports.sendMessage = function(io, socket, req, handle) {
 		
 		message.sanatise();
 		handle(null);
-		io.emit('newMessage', message);
+		io.to(req.roomId).emit('newMessage', message);
 	});
 }
