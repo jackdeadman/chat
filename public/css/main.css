@@ -59,7 +59,7 @@ table {
 body {
   color: #444;
   font-family: helvetica, sans-serif;
-  background-color: #000;
+  background-image: url("matrix.jpg");
 }
 
 h1, .h1 {
@@ -101,9 +101,8 @@ small {
   background-color: #000;
 }
 .chat-container header {
-  border: 1px solid #f8f8f8;
   padding: 1.5em 3em;
-  background-color: #f1f1f1;
+  background-color: #000;
 }
 .chat-container header .title {
   font-size: 1.2em;
@@ -114,7 +113,6 @@ small {
 }
 .chat-container .messages .message {
   padding: 1em 3em;
-  border-bottom: 1px solid #f8f8f8;
 }
 .chat-container .message-form {
   position: relative;
@@ -124,4 +122,6 @@ small {
   max-width: 100%;
   display: block;
   font-size: inherit;
+  background-color: #000;
+  color: #00FF00;
 }
