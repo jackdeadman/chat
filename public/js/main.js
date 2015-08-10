@@ -8,7 +8,7 @@ App.Chat = (function(Api, User) {
 	
 	var _settings = {
 		// Get id from url
-		chatId: location.href.match(/[^/]*$/)[0],
+		roomId: location.href.match(/[^/]*$/)[0],
 		initialMessageCount: 40,
 		loadMoreAmount: 10,
 		textMessageTemplate: '<li class="message">{{message}}</li>',
@@ -28,35 +28,22 @@ App.Chat = (function(Api, User) {
 	function _init() {
 		currentUser = User.getUser();
 		client = new Api(currentUser);
-		room = client.getRoom(_settings.chatId);
-		console.log(room);
-		if (client.hasPermission(room)) {
+		room = client.getRoom(_settings.roomId);
+		
+		room.getMessages(0, _settings.initialMessageCount, function(err, messages) {
+			room.enter();
+			_displayInitialMessages(messages);
 			_bindEvents();
-			_displayInitialMessages();
-		} else {
-			console.log('You do no have permission');
-		}
+		});
 		
 	}
 	
 	function _bindEvents() {
-		// Socket Events
-		// io.on('userEntered', indicateNewUser);
 		
+		// Socket Events		
 		room.onNewMessage(function(message) {
 			_displayNewMessage(message);
 		});
-		
-		room.onMessageFail(function() {
-			console.error('Failed to send message.');
-		});
-		
-		// room.on('usersTyping', function(users) {
-		// 	_displayTypingUsers();
-		// });
-
-		// io.on('userStartedTying', addTyper);
-		// io.on('userStoppedTyping', removeTyper);
 		
 		// DOM events
 		$messageForm.on('keydown', function(e) {
@@ -77,15 +64,12 @@ App.Chat = (function(Api, User) {
 		return DOM.renderTemplate(_settings.imageMessageTemplate, { src: src });
 	}
 	
-	function _displayInitialMessages() {
-		var amount = _settings.initialMessageCount;
+	function _displayInitialMessages(messages) {
 
-		room.getMessages(amount, function(messages) {
-			for (var i = 0; i < messages.length; ++i) {
-				var message = messages[i];
-				_displayNewMessage(message);
-			}			
-		});
+		for (var i = 0; i < messages.length; ++i) {
+			var message = messages[i];
+			_displayNewMessage(message);
+		}
 	}
 	
 	function _displayNewMessage(message) {
@@ -98,21 +82,21 @@ App.Chat = (function(Api, User) {
 		$messagesContainer.append(messageNode);
 	}
 	
-	function _displayTypingUsers(users) {
-		
-	}
-	
-	function _displayOldMessages(messages) {
-		// TODO
+	function _handleMessageAck(err) {
+		if(err) {
+			alert('Error');
+		} else {
+			// alert('success');
+		}
 	}
 	
 	// Public:
 	function sendMessage(message) {
 		if (typeof message === 'undefined') {
-			room.sendMessage($messageForm.value());
+			room.sendMessage($messageForm.value(), _handleMessageAck);
 			$messageForm.value('');	
 		} else {
-			room.sendMessage(message);	
+			room.sendMessage(message, _handleMessageAck);	
 		}
 	}
 		

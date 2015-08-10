@@ -7,7 +7,6 @@ App.Api = (function() {
 	'use strict';
 	
 	Api.VERSION = '0.0.1';
-	var BASE_URL = '/api/chat';
 	var _socket;
 	
 	function Api(user) {
@@ -35,36 +34,34 @@ App.Api = (function() {
 		this.typingUsers = [];
 	}
 	
-	// Requests
-	Room.prototype.getMessages = function(count, callback, startIndex) {
-		if (typeof startIndex === 'undefined') startIndex = 0;
-		
-		var url = BASE_URL+'/'+this.roomId+'/messages/'+count+'/'+startIndex;
-		
-		DOM.xhr({
-			src: url,
-			success: callback,
-			error: _failedToConnect
-		});
-	}
-	
 	// Events
 	Room.prototype.onNewMessage = function(handle) {
 		_socket.on('newMessage', function(message) {
 			handle.call(this, message);
 		});
 	};
-	
-	Room.prototype.onMessageFail = function(handle) {
-		_socket.on('messageFail', handle);
-	};
-	
+
 	// Local user has stopped typing
 	Room.prototype.userHasStoppedTyping = function() {
-		_socket.emit('userStoppedTyping',this.client.user);
+		_socket.emit('userStoppedTyping', this.client.user);
 	}
 	
 	// Triggers
+	
+	Room.prototype.enter = function(handle) {
+		_socket.emit('entered');
+	};
+	
+	Room.prototype.getMessages = function(start, amount, handle) {
+		_socket.emit('requestMessages', {
+			roomId: this.roomId,
+			start: start,
+			amount: amount,
+			handle: handle,
+			user: {}
+		}, handle);
+	};
+	
 	Room.prototype.userIsTyping = function() {
 		_socket.emit('userIsTyping', this.client.hash);	
 	};
@@ -74,7 +71,9 @@ App.Api = (function() {
 			messageString: messageString,
 			roomId: this.roomId
 		}
-		_socket.emit('newMessage', message);
+		_socket.emit('newMessage', message, function(err) {
+			callback(err);
+		});
 	}
 	
 	function _connect() {

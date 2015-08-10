@@ -97,5 +97,5 @@ function onListening() {
 }
 
 var io = require('socket.io')(server);
-require('../sockets/chat')(io);
+require('../sockets')(io);
 
