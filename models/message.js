@@ -5,6 +5,8 @@ var Schema = mongoose.Schema;
 var Entities = require('html-entities').AllHtmlEntities;
 var entities = new Entities();
 
+var katex = require('parse-katex');
+
 var MessageSchema = new Schema({
 	posted_by: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -27,7 +29,7 @@ MessageSchema.methods.sanatise = function() {
 };
 
 MessageSchema.methods.convertNewLines = function() {
-	this.content = this.content.replace('n', '<br>');
+	this.content = this.content.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
 
 MessageSchema.methods.getUsers = function() {
@@ -38,9 +40,14 @@ MessageSchema.methods.getUsers = function() {
 	});
 }
 
-MessageSchema.methods.isValidMessage = function(message) {
-	return this.content.replace(/\s/g, "").length > 0;
+MessageSchema.methods.renderLatex = function() {
+	this.content = katex.renderLaTeX(this.content);
 }
+
+MessageSchema.statics.isValidMessage = function(message) {
+	return message.replace(/\s/g, "").length > 0;
+}
+
 
 
 MessageSchema.plugin(timestamps);

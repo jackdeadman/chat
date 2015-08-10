@@ -38,12 +38,19 @@ module.exports.createNewChat = function(req, res, next) {
 }
 
 // Sockets
-// Protocol
-/*
-sends -> io, socket, req, handle
-receives -> handle(err, data)
 
-*/
+function cleanMessages(messages) {
+	
+	for (var i=0; i<messages.length; i++) {
+		var message = messages[i];
+		message.sanatise();
+		message.renderLatex();
+		message.convertNewLines();	
+	}
+	
+	return messages;
+}
+
 
 module.exports.getMessages = function(io, socket, req, handle) {
 	Room.findByPublicId(req.roomId, function(err, room) {
@@ -53,7 +60,7 @@ module.exports.getMessages = function(io, socket, req, handle) {
 		}
 		room.getMessages(function(err, messages) {
 			if (err) handle(new Error('Failed to get message'));
-			else handle(null, messages);
+			else handle(null, cleanMessages(messages));
 		}, req.amount);
 	});
 }
@@ -73,12 +80,14 @@ function saveMessage(req, handle) {
 }
 
 module.exports.sendMessage = function(io, socket, req, handle) {
-	
+	if (!Message.isValidMessage(req.messageString)) {
+		handle(new Error('Not a valid message'));
+		return;
+	}
 	saveMessage(req, function(err, message) {
 		if (err) handle(new Error("Failed to save message"));
 		
-		message.sanatise();
 		handle(null);
-		io.to(req.roomId).emit('newMessage', message);
+		io.to(req.roomId).emit('newMessage', cleanMessages([message])[0]);
 	});
 }
