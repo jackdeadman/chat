@@ -54,7 +54,7 @@ module.exports.getMessages = function(io, socket, req, handle) {
 		room.getMessages(function(err, messages) {
 			if (err) handle(new Error('Failed to get message'));
 			else handle(null, messages);
-		});
+		}, req.amount);
 	});
 }
 

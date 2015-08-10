@@ -21,8 +21,14 @@ RoomSchema.statics.findByPublicId = function(id, handle) {
 	this.findOne({_id: actualId}, handle);
 };
 
-RoomSchema.methods.getMessages = function(handle) {
-	this.model('Message').find({room_id: this._id}, handle);
+RoomSchema.methods.getMessages = function(handle, amount) {
+	this.model('Message')
+		.find({room_id: this._id})
+		.sort({$natural: -1})
+		.limit(amount)
+		.exec(function(err, messages) {
+			handle(err, messages.reverse());
+		});
 }
 
 RoomSchema.plugin(timestamps);

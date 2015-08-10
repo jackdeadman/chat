@@ -9,7 +9,7 @@ App.Chat = (function(Api, User) {
 	var _settings = {
 		// Get id from url
 		roomId: location.href.match(/[^/]*$/)[0],
-		initialMessageCount: 40,
+		initialMessageCount: 20,
 		loadMoreAmount: 10,
 		textMessageTemplate: '<li class="message">{{message}}</li>',
 		imageMessageTemplate: '<img class="" src="{{src}}">'
