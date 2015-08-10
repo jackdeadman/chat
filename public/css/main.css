@@ -113,6 +113,7 @@ small {
 }
 .chat-container .messages .message {
   padding: 1em 3em;
+  border-bottom: 1px dashed #00FF00;
 }
 .chat-container .message-form {
   position: relative;
