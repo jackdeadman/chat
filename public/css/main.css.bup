@@ -59,7 +59,7 @@ table {
 body {
   color: #444;
   font-family: helvetica, sans-serif;
-  background-color: #000;
+  background-color: #439ae3;
 }
 
 h1, .h1 {
@@ -97,8 +97,7 @@ small {
 .chat-container {
   width: 500px;
   margin: 50px auto;
-  color: #00FF00;
-  background-color: #000;
+  background-color: #fff;
 }
 .chat-container header {
   border: 1px solid #f8f8f8;
