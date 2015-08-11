@@ -13,6 +13,9 @@ module.exports = function(grunt){
 					spawn: false,
 				},
 			},
+			html: {
+				files: ['views/*.ejs']
+			}
 		},
 		
 		sass: {
@@ -22,10 +25,17 @@ module.exports = function(grunt){
 			},
 		},
 		
+		nodemon: {
+			dev: {
+				script: 'bin/www'
+			}
+		}
+		
 	});
 	
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-nodemon');
 	
-	grunt.registerTask('default', ['sass','watch']);
+	grunt.registerTask('default', ['watch']);
 };
