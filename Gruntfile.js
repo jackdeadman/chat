@@ -29,13 +29,26 @@ module.exports = function(grunt){
 			dev: {
 				script: 'bin/www'
 			}
+		},
+		
+		concurrent: {
+			dev: {
+				tasks: ['nodemon', 'watch'],
+				options: {
+					logConcurrentOutput: true
+				}
+			}
 		}
 		
 	});
 	
+	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-nodemon');
 	
-	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('default', '', function() {
+		var taskList = ['concurrent','nodemon','watch'];
+		grunt.task.run(taskList);
+	});
 };
