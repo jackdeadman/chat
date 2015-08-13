@@ -113,9 +113,10 @@ small {
   width: 300px;
   height: 50px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
-  padding: 17px; }
+  padding: 17px;
+  transition: 0.5s ease background-color; }
   .new-chat a {
     text-decoration: none;
     color: #444;
@@ -123,5 +124,8 @@ small {
     font-weight: bold; }
   .new-chat a:hover {
     color: #000; }
+
+.new-chat:hover {
+  background-color: #74F2AB; }
 
 /*# sourceMappingURL=main.css.map */
