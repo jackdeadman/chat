@@ -116,16 +116,14 @@ small {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 17px;
-  transition: 0.5s ease background-color; }
-  .new-chat a {
-    text-decoration: none;
-    color: #444;
-    transition: 0.5s ease color;
-    font-weight: bold; }
-  .new-chat a:hover {
-    color: #000; }
+  transition: 0.5s ease background-color;
+  text-decoration: none;
+  color: #444;
+  transition: 0.5s ease color;
+  font-weight: bold; }
 
 .new-chat:hover {
+  color: #000;
   background-color: #74F2AB; }
 
 /*# sourceMappingURL=main.css.map */
