@@ -1,8 +1,8 @@
 .chat-container {
 	
 	width: 80%;
-	margin: 50px auto;
-	background-color: #e5e5e5;
+	margin: 20px auto;
+	background-color: #d6d6d6;
 	
 	header {
 		padding: 1.5em 3em;
@@ -16,6 +16,7 @@
 	.messages {
 		height: 400px;
 		overflow-y: scroll;
+		background-color: #e5e5e5;
 		
 		.message {
 			margin: 20px;
@@ -45,11 +46,13 @@
 			background-color: #f7f7f7;
 			font-family: Helvetica, sans-serif;
 			font-size: $p-font-size;
+			border-radius: 3px;
+			margin-right: 0;
 		}
 		
 		.send-message-btn {
 			width: 10%;
-			height: 50px;
+			height: 60px;
 			margin: 20px;
 			background-color: #197DFF;
 			border: none;
@@ -79,5 +82,5 @@
 }
 
 ::-webkit-scrollbar-track {
-	background-color: #ccc;
+	background-color: #dedede;
 }

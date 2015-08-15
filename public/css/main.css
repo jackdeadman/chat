@@ -81,8 +81,8 @@ small {
 
 .chat-container {
   width: 80%;
-  margin: 50px auto;
-  background-color: #e5e5e5; }
+  margin: 20px auto;
+  background-color: #d6d6d6; }
   .chat-container header {
     padding: 1.5em 3em;
     background-color: #74F2AB; }
@@ -90,7 +90,8 @@ small {
       font-size: 1.2em; }
   .chat-container .messages {
     height: 400px;
-    overflow-y: scroll; }
+    overflow-y: scroll;
+    background-color: #e5e5e5; }
     .chat-container .messages .message {
       margin: 20px;
       padding: 1em 3em;
@@ -113,10 +114,12 @@ small {
       margin: 20px;
       background-color: #f7f7f7;
       font-family: Helvetica, sans-serif;
-      font-size: 1.25em; }
+      font-size: 1.25em;
+      border-radius: 3px;
+      margin-right: 0; }
     .chat-container .message-form .send-message-btn {
       width: 10%;
-      height: 50px;
+      height: 60px;
       margin: 20px;
       background-color: #197DFF;
       border: none;
@@ -138,7 +141,7 @@ small {
   background-color: #949494; }
 
 ::-webkit-scrollbar-track {
-  background-color: #ccc; }
+  background-color: #dedede; }
 
 .new-chat {
   position: absolute;
