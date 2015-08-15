@@ -51,9 +51,7 @@ table {
 body {
   color: #444;
   font-family: helvetica, sans-serif;
-  background: no-repeat center center fixed;
-  background-size: cover;
-  background-image: url("/assets/blurredbackground.jpg"); }
+  background-color: #C3E3C5; }
 
 h1, .h1 {
   font-size: 5em; }
@@ -82,22 +80,50 @@ small {
 .chat-container {
   width: 80%;
   margin: 20px auto;
-  background-color: #d6d6d6; }
+  background-color: #d6d6d6;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
   .chat-container header {
     padding: 1.5em 3em;
     background-color: #74F2AB; }
     .chat-container header .title {
-      font-size: 1.2em; }
+      font-size: 1.2em;
+      font-weight: bold; }
   .chat-container .messages {
     height: 400px;
     overflow-y: scroll;
     background-color: #e5e5e5; }
     .chat-container .messages .message {
-      margin: 20px;
+      width: 80%;
+      margin: 20px 10%;
+      margin-bottom: 40px;
       padding: 1em 3em;
       background-color: #fff;
       border-radius: 3px;
-      line-height: 1.6em; }
+      line-height: 1.6em;
+      font-size: 1.1em;
+      position: relative;
+      box-shadow: 0 3px #ccc; }
+    .chat-container .messages .message:nth-child(2n) {
+      width: 70%;
+      margin-left: 20%; }
+    .chat-container .messages .message:after {
+      top: 50%;
+      right: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(255, 255, 255, 0);
+      border-right-color: #fff;
+      border-width: 20px;
+      margin-top: -20px; }
+    .chat-container .messages .message:nth-child(2n):after {
+      left: 100%;
+      border-right-color: rgba(255, 255, 255, 0);
+      border-left-color: #fff;
+      margin-right: -500px; }
   .chat-container .message-form {
     position: relative;
     display: flex;
@@ -124,14 +150,12 @@ small {
       background-color: #197DFF;
       border: none;
       border-radius: 3px;
-      color: #4b4b4b;
-      font-size: 1.3em;
+      color: #fff;
+      font-size: 1.1em;
       border-bottom: 3px solid #0E468F;
-      transition: 0.2s ease background-color;
-      transition: 0.2s ease color; }
+      transition: 0.5s ease background-color; }
     .chat-container .message-form .send-message-btn:hover {
-      background-color: #3C8FFA;
-      color: #fff; }
+      background-color: #3C8FFA; }
 
 ::-webkit-scrollbar {
   width: 12px; }
