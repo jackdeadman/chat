@@ -23,6 +23,7 @@ App.Chat = (function(Api, User) {
 	var $container = DOM('.chat-container');
 	var $messagesContainer = $container.find('.messages');
 	var $messageForm = $container.find('.message-form textarea');
+	var $messageButton = $container.find('.send-message-btn');
 
 	// Private:
 	function _init() {
@@ -53,6 +54,10 @@ App.Chat = (function(Api, User) {
 				e.preventDefault();
 				sendMessage();
 			}
+		});
+		
+		$messageButton.on('click', function() {
+			sendMessage();
 		});
 	}
 	
