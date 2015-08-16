@@ -31,6 +31,7 @@
 			font-size: $message-font-size;
 			position: relative;
 			box-shadow: 0 3px #ccc;
+			word-wrap: break-word;
 		}
 		
 		.message:nth-child(2n) {
