@@ -127,7 +127,7 @@ small {
   .chat-container .message-form {
     position: relative;
     display: flex;
-    align-items: center; }
+    align-items: flex-end; }
     .chat-container .message-form textarea {
       width: 90%;
       max-width: 100%;
