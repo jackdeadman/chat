@@ -153,6 +153,11 @@ App.Chat = (function(Api, User) {
 		var children = $messagesContainer.elements[0].children;
 		var node = children[children.length-1];
 		node.dataset.messageId = message._id;
+		
+		var container = $messagesContainer.elements[0];
+		container.scrollTop = container.scrollHeight;
+		
+		return node;
 	}
 	
 	function _handleMessageAck(err) {
