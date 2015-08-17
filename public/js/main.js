@@ -53,14 +53,24 @@ App.Chat = (function(Api, User) {
 		$messageForm.on('keydown', function(e) {
 			room.userIsTyping();
 			// Handle enter press
-			if (e.keyCode === 13) {
+			if (e.keyCode === 13 && !e.shiftKey) {
 				e.preventDefault();
-				sendMessage();
+				$messageButton.elements[0].click();
 			}
 		});
 		
+		$messageForm.on('input', function() {
+			var node = $messageButton.elements[0];
+
+			if (this.value === '') 
+				node.classList.add('disabled');
+			else
+				node.classList.remove('disabled');
+		});
+		
 		$messageButton.on('click', function() {
-			sendMessage();
+			if ($messageForm.value() !== '')
+				sendMessage();
 		});
 		
 		$messagesContainer.on('click', function(e) {
