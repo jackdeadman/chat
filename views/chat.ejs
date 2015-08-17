@@ -13,7 +13,11 @@
 			<div class="title"><%= title %></div>
 		</header>
 		
-		<ul class="messages"></ul>
+		<ul class="messages">
+			<script id="message-template" type="text/template">
+				<li class="message">{{message}}</li>
+			</script>
+		</ul>
 		<div id="user-typing"></div>
 		<div class="message-form">
 			<textarea name="message" cols="30" rows="5"></textarea>

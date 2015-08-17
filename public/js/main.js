@@ -11,7 +11,7 @@ App.Chat = (function(Api, User) {
 		roomId: location.href.match(/[^/]*$/)[0],
 		initialMessageCount: 20,
 		loadMoreAmount: 10,
-		textMessageTemplate: '<li class="message">{{message}}</li>',
+		textMessageTemplate: DOM('#message-template').html(),
 		imageMessageTemplate: '<img class="" src="{{src}}">'
 	}
 	
