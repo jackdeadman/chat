@@ -88,10 +88,10 @@ App.Chat = (function(Api, User) {
 			
 			DOM(modal).find('.save').on('click', function() {
 				var message = DOM(modal).find('textarea').value();
-				room.updateMessage(messageId, message, function(){
+				room.updateMessage(messageId, message, function(message){
 					// Remove modal
 					modal.parentNode.removeChild(modal);
-					DOM(node).find('.message-content').html(message);	
+					DOM(node).find('.message-content').html(message.content);	
 				});	
 			});
 			

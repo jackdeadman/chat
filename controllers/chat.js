@@ -75,9 +75,12 @@ module.exports.getMessage = function(io, socket, req, handle) {
 module.exports.updateMessage = function(io, socket, req, handle) {
 	Message.findByIdAndUpdate(req.messageId, {
 		content: req.messageString
-	}, function(err) {
+	}, function(err, message) {
 		if (err) handle(new Error('Failed to update message'));
-		else handle();
+		else {
+			message.content = req.messageString;
+			handle(cleanMessages([message])[0]);
+		}
 	});
 };
 
