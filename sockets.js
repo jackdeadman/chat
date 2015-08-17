@@ -17,6 +17,10 @@ function bindClient(io,socket) {
 	socket.on('newMessage', function(req, handle) {
 		chatController.sendMessage(io, socket, req, handle);
 	});
+	
+	socket.on('updateMessage', function(req, handle) {
+		chatController.updateMessage(io, socket, req, handle);
+	});
 }
 // Add names rooms/namespaces
 module.exports = function(io) {

@@ -76,10 +76,15 @@ App.Api = (function() {
 			messageString: messageString,
 			roomId: this.roomId
 		}
-		_socket.emit('newMessage', message, function(err) {
-			callback(err);
-		});
+		_socket.emit('newMessage', message, callback);
 	}
+	
+	Room.prototype.updateMessage = function(id, message, callback) {
+		_socket.emit('updateMessage', {
+			messageId: id,
+			messageString: message
+		}, callback);
+	};
 		
 	function _connect() {
 		// Open socket

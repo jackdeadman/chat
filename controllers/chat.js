@@ -66,9 +66,18 @@ module.exports.getMessages = function(io, socket, req, handle) {
 }
 
 module.exports.getMessage = function(io, socket, req, handle) {
-	Message.find({_id: req.messageId}, function(err, message) {
+	Message.findOne({_id: req.messageId}, function(err, message) {
 		if (err) handle(new Error('Failed to get message'));
-		else handle(message[0]);
+		else handle(message);
+	});
+};
+
+module.exports.updateMessage = function(io, socket, req, handle) {
+	Message.findByIdAndUpdate(req.messageId, {
+		content: req.messageString
+	}, function(err) {
+		if (err) handle(new Error('Failed to update message'));
+		else handle();
 	});
 };
 

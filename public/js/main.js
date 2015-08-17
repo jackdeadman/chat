@@ -78,7 +78,8 @@ App.Chat = (function(Api, User) {
 	}
 	
 	function _editMessage(node) {
-		room.getMessage(node.dataset.messageId, function(message) {
+		var messageId = node.dataset.messageId;
+		room.getMessage(messageId, function(message) {
 			var modal = DOM.renderTemplate(_settings.editMessageTemplate, {
 				message: message.content
 			});
@@ -86,9 +87,15 @@ App.Chat = (function(Api, User) {
 			var modal = convertToNodes(modal);
 			
 			DOM(modal).find('.save').on('click', function() {
-				modal.parentNode.removeChild(modal);
+				var message = DOM(modal).find('textarea').value();
+				room.updateMessage(messageId, message, function(){
+					// Remove modal
+					modal.parentNode.removeChild(modal);
+					DOM(node).find('.message-content').html(message);	
+				});	
 			});
 			
+			// Add modal
 			document.body.appendChild(modal);
 		});
 	}
