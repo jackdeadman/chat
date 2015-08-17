@@ -62,7 +62,11 @@ App.Chat = (function(Api, User) {
 	}
 	
 	function _createTextMessage(message) {
-		return DOM.renderTemplate(_settings.textMessageTemplate, { message: message.content });
+		return DOM.renderTemplate(_settings.textMessageTemplate,{
+				message: message.content,
+				profileUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg',
+				postedAt: moment(message.createdAt).fromNow()
+		});
 	}
 	
 	function _createImageMessage(src) {

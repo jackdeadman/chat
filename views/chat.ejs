@@ -15,7 +15,12 @@
 		
 		<ul class="messages">
 			<script id="message-template" type="text/template">
-				<li class="message">{{message}}</li>
+				<li class="message">
+					<img src="{{profileUrl}}" alt="User picture">
+					<p>{{message}}</p>
+					<time>{{postedAt}}</time>
+					<div class="edit"><a href="#">Edit</a></div>
+				</li>
 			</script>
 		</ul>
 		<div id="user-typing"></div>
@@ -28,6 +33,7 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/dom.min.js"></script>
 	<script type="text/javascript" src="/js/js.cookie.js"></script>
+	<script type="text/javascript" src="/js/moment.min.js"></script>
 	<script type="text/javascript" src="/js/api.js"></script>
 	<script type="text/javascript" src="/js/user.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
