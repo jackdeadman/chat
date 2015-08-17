@@ -73,13 +73,18 @@ module.exports.getMessage = function(io, socket, req, handle) {
 };
 
 module.exports.updateMessage = function(io, socket, req, handle) {
+	if (!Message.isValidMessage(req.messageString)) {
+		handle(new Error('Message is invalid'));
+		return;
+	}
+	
 	Message.findByIdAndUpdate(req.messageId, {
 		content: req.messageString
 	}, function(err, message) {
 		if (err) handle(new Error('Failed to update message'));
 		else {
 			message.content = req.messageString;
-			handle(cleanMessages([message])[0]);
+			handle(null, cleanMessages([message])[0]);
 		}
 	});
 };

@@ -88,9 +88,14 @@ App.Chat = (function(Api, User) {
 			
 			DOM(modal).find('.save').on('click', function() {
 				var message = DOM(modal).find('textarea').value();
-				room.updateMessage(messageId, message, function(message){
+				room.updateMessage(messageId, message, function(err, message){
+					if (err) {
+						console.log(err);
+						return;
+					}
 					// Remove modal
 					modal.parentNode.removeChild(modal);
+					// TODO: re-render whole message
 					DOM(node).find('.message-content').html(message.content);	
 				});	
 			});
