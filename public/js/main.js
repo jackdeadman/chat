@@ -1,3 +1,4 @@
+/* global moment */
 /* global App */
 /* global DOM */
 
@@ -12,6 +13,7 @@ App.Chat = (function(Api, User) {
 		initialMessageCount: 20,
 		loadMoreAmount: 10,
 		textMessageTemplate: DOM('#message-template').html(),
+		editMessageTemplate: DOM('#edit-message-template').html(),
 		imageMessageTemplate: '<img class="" src="{{src}}">'
 	}
 	
@@ -27,6 +29,7 @@ App.Chat = (function(Api, User) {
 
 	// Private:
 	function _init() {
+		$messagesContainer.html('');
 		currentUser = User.getUser();
 		client = new Api(currentUser);
 		room = client.getRoom(_settings.roomId);
@@ -59,6 +62,52 @@ App.Chat = (function(Api, User) {
 		$messageButton.on('click', function() {
 			sendMessage();
 		});
+		
+		$messagesContainer.on('click', function(e) {
+			
+			var node = _lookUpTree(e.target, function(element){
+				if (element.classList)
+					return element.classList.contains('edit');
+			});
+			
+			if (node) {
+				e.preventDefault();
+				_editMessage(node.parentNode);
+			}
+		});
+	}
+	
+	function _editMessage(node) {
+		room.getMessage(node.dataset.messageId, function(message) {
+			var modal = DOM.renderTemplate(_settings.editMessageTemplate, {
+				message: message.content
+			});
+			
+			var modal = convertToNodes(modal);
+			
+			DOM(modal).find('.save').on('click', function() {
+				modal.parentNode.removeChild(modal);
+			});
+			
+			document.body.appendChild(modal);
+		});
+	}
+	
+	function convertToNodes(string) {
+		var div = document.createElement('div');
+		div.innerHTML = string;
+		return div.children[0];
+	}
+	
+	// recursively look up tree for an element that satisfies
+	// the function
+	function _lookUpTree(child, matcher) {
+		if (child.parentNode === null)
+			return false;
+		if (matcher(child))
+			return child;
+		else
+			return _lookUpTree(child.parentNode, matcher);
 	}
 	
 	function _createTextMessage(message) {
@@ -89,6 +138,9 @@ App.Chat = (function(Api, User) {
 			messageNode = _createTextMessage(message);
 		}
 		$messagesContainer.append(messageNode);
+		var children = $messagesContainer.elements[0].children;
+		var node = children[children.length-1];
+		node.dataset.messageId = message._id;
 	}
 	
 	function _handleMessageAck(err) {

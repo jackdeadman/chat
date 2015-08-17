@@ -10,6 +10,10 @@ function bindClient(io,socket) {
 		chatController.getMessages(io, socket, req, handle);
 	});
 	
+	socket.on('requestMessage', function(req, handle) {
+		chatController.getMessage(io, socket, req, handle);
+	});
+	
 	socket.on('newMessage', function(req, handle) {
 		chatController.sendMessage(io, socket, req, handle);
 	});

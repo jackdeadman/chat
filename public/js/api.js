@@ -57,9 +57,14 @@ App.Api = (function() {
 			roomId: this.roomId,
 			start: start,
 			amount: amount,
-			handle: handle,
 			user: {}
 		}, handle);
+	};
+	
+	Room.prototype.getMessage = function(id, callback) {
+		_socket.emit('requestMessage', {
+			messageId: id
+		}, callback);
 	};
 	
 	Room.prototype.userIsTyping = function() {
@@ -75,7 +80,7 @@ App.Api = (function() {
 			callback(err);
 		});
 	}
-	
+		
 	function _connect() {
 		// Open socket
 		try {

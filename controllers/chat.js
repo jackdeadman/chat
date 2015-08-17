@@ -59,11 +59,18 @@ module.exports.getMessages = function(io, socket, req, handle) {
 			return; 
 		}
 		room.getMessages(function(err, messages) {
-			if (err) handle(new Error('Failed to get message'));
+			if (err) handle(new Error('Failed to get messages'));
 			else handle(null, cleanMessages(messages));
 		}, req.amount);
 	});
 }
+
+module.exports.getMessage = function(io, socket, req, handle) {
+	Message.find({_id: req.messageId}, function(err, message) {
+		if (err) handle(new Error('Failed to get message'));
+		else handle(message[0]);
+	});
+};
 
 function saveMessage(req, handle) {
 	var roomId = hashids.decodeHex(req.roomId);
