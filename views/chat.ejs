@@ -7,22 +7,48 @@
 	<link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+	
+	<script id="edit-message-template" type="text/template">
+		<div class="modal">
+			<div class="inner">
+				<h2>Editing Message</h2>
+				<textarea name="message-editor" id="" cols="30" rows="10">{{message}}</textarea>
+				<button class="button btn-primary save">Save</button>
+			</div>
+		</div>
+	</script>
+	
 	<div class="chat-container">
 		
 		<header>
 			<div class="title"><%= title %></div>
 		</header>
 		
-		<ul class="messages"></ul>
-		<div id="user-typing"></div>
+		<ul class="messages">
+			<script id="message-template" type="text/template">
+				<li class="message">
+					<img src="{{profileUrl}}" alt="User picture">
+					<p class="message-content">{{message}}</p>
+					<time>{{postedAt}}</time>
+					<div class="edit"><a href="#">Edit</a></div>
+				</li>
+			</script>
+		</ul>
+		
 		<div class="message-form">
 			<textarea name="message" cols="30" rows="5"></textarea>
+			<div class="message-actions">
+				<!--temp-->
+				<div class="smilies-btn">😄</div>
+				<button class="send-message-btn disabled">Send</button>
+			</div>
 		</div>
 		
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/dom.min.js"></script>
 	<script type="text/javascript" src="/js/js.cookie.js"></script>
+	<script type="text/javascript" src="/js/moment.min.js"></script>
 	<script type="text/javascript" src="/js/api.js"></script>
 	<script type="text/javascript" src="/js/user.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>

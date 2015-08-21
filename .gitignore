@@ -16,3 +16,7 @@ _references.js
 
 # Node
 node_modules
+
+# SASS
+*.css.map
+.sass-cache

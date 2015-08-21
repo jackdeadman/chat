@@ -1,0 +1,32 @@
+.menu-container {
+	width: 400px;
+	margin: 200px auto;
+	
+	.options {
+		a {
+			display: block;
+			padding: 10px 0;
+			background-color: #fff;
+			box-shadow: 0 0 5px rgba(0,0,0,0.2);
+			text-align: center;
+			padding: 17px;
+			transition: 0.5s ease color,
+						0.5s ease background-color;
+			text-decoration: none;
+			color: $font-color;
+			font-weight: bold;
+			
+			&:hover {
+				color: #000;
+				background-color: #74F2AB;
+			}
+		}
+	}
+	
+	&.open {
+		margin-top: 50px;
+		.new-chat-options {
+			display: block;
+		}
+	}
+}
