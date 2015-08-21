@@ -21,6 +21,7 @@ App.Chat = (function(Api, User) {
 	var room;
 	var currentUser;
 	var _messages = [];
+	var _windowVisible = true;
 	
 	// Cache DOM:
 	var $container = DOM('.chat-container');
@@ -61,6 +62,15 @@ App.Chat = (function(Api, User) {
 		});
 		
 		// DOM events
+		
+		window.onfocus = function() {
+			_windowVisible = true;
+		};
+		
+		window.onblur = function() {
+			_windowVisible = false;
+		};
+		
 		$messageForm.on('keydown', function(e) {
 			room.userIsTyping();
 			// Handle enter press
@@ -179,7 +189,7 @@ App.Chat = (function(Api, User) {
 			body: message.content,
 			icon: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg'
 		};
-		if (window.hidden) {
+		if (!_windowVisible) {
 			new Notification(title, options);	
 		} 
 	}
