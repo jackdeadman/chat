@@ -148,7 +148,7 @@ App.Chat = (function(Api, User) {
 	}
 	
 	function _notifyNewMessage(message) {
-		var title = "A messae from Jack";
+		var title = "A message from Jack";
 		var options = {
 			body: message.content,
 			icon: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg'
