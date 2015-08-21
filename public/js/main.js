@@ -200,13 +200,16 @@ App.Chat = (function(Api, User) {
 		};
 		if (!_windowVisible) {
 			document.title = '('+ ++unreadMessages + ') '+ _settings.pageTitle;
-			var n = new Notification(title, options);
 			
-			n.onshow = function() {
-				setTimeout(function () {
-					n.close();
-				}, _settings.notificationDisplayLength);
-			};
+			if (Notification.permission === 'granted') {
+				var n = new Notification(title, options);
+				
+				n.onshow = function() {
+					setTimeout(function () {
+						n.close();
+					}, _settings.notificationDisplayLength);
+				};
+			}
 		} 
 	}
 
