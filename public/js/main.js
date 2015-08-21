@@ -12,6 +12,7 @@ App.Chat = (function(Api, User) {
 		roomId: location.href.match(/[^/]*$/)[0],
 		initialMessageCount: 20,
 		loadMoreAmount: 10,
+		pageTitle: document.title,
 		textMessageTemplate: DOM('#message-template').html(),
 		editMessageTemplate: DOM('#edit-message-template').html(),
 		updateTimer: 1000
@@ -22,6 +23,7 @@ App.Chat = (function(Api, User) {
 	var currentUser;
 	var _messages = [];
 	var _windowVisible = true;
+	var unreadMessages = 0;
 	
 	// Cache DOM:
 	var $container = DOM('.chat-container');
@@ -61,10 +63,16 @@ App.Chat = (function(Api, User) {
 			_displayNewMessage(message);
 		});
 		
+		room.onConnectionLost(function() {
+			window.location = '/';
+		});
+		
 		// DOM events
 		
 		window.onfocus = function() {
 			_windowVisible = true;
+			unreadMessages = 0;
+			document.title = _settings.pageTitle;
 		};
 		
 		window.onblur = function() {
@@ -190,10 +198,11 @@ App.Chat = (function(Api, User) {
 			icon: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg'
 		};
 		if (!_windowVisible) {
-			new Notification(title, options);	
+			new Notification(title, options);
+			document.title = '('+ ++unreadMessages + ') '+_settings.pageTitle;
 		} 
 	}
-	
+
 	function _displayInitialMessages(messages) {
 
 		for (var i = 0; i < messages.length; ++i) {

@@ -85,6 +85,10 @@ App.Api = (function() {
 			messageString: message
 		}, callback);
 	};
+	
+	Room.prototype.onConnectionLost = function(callback) {
+		_socket.on('connect_error', callback);
+	}
 		
 	function _connect() {
 		// Open socket
