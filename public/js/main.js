@@ -30,6 +30,8 @@ App.Chat = (function(Api, User) {
 	// Private:
 	function _init() {
 		$messagesContainer.html('');
+		Notification.requestPermission();
+		
 		currentUser = User.getUser();
 		client = new Api(currentUser);
 		room = client.getRoom(_settings.roomId);
@@ -46,6 +48,7 @@ App.Chat = (function(Api, User) {
 		
 		// Socket Events		
 		room.onNewMessage(function(message) {
+			_notifyNewMessage(message);
 			_displayNewMessage(message);
 		});
 		
@@ -142,6 +145,17 @@ App.Chat = (function(Api, User) {
 	
 	function _createImageMessage(src) {
 		return DOM.renderTemplate(_settings.imageMessageTemplate, { src: src });
+	}
+	
+	function _notifyNewMessage(message) {
+		var title = "A messae from Jack";
+		var options = {
+			body: message.content,
+			icon: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg'
+		};
+		if (window.hidden) {
+			new Notification(title, options);	
+		} 
 	}
 	
 	function _displayInitialMessages(messages) {
