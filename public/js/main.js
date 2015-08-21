@@ -14,12 +14,13 @@ App.Chat = (function(Api, User) {
 		loadMoreAmount: 10,
 		textMessageTemplate: DOM('#message-template').html(),
 		editMessageTemplate: DOM('#edit-message-template').html(),
-		imageMessageTemplate: '<img class="" src="{{src}}">'
+		updateTimer: 1000
 	}
 	
 	var client;
 	var room;
 	var currentUser;
+	var _messages = [];
 	
 	// Cache DOM:
 	var $container = DOM('.chat-container');
@@ -39,7 +40,13 @@ App.Chat = (function(Api, User) {
 		room.getMessages(0, _settings.initialMessageCount, function(err, messages) {
 			room.enter();
 			_displayInitialMessages(messages);
+			_messages = messages;
 			_bindEvents();
+			
+			setInterval(function() {
+				_updateMessageTimes();
+			}, _settings.updateTimer);
+			
 		});
 		
 	}
@@ -48,6 +55,7 @@ App.Chat = (function(Api, User) {
 		
 		// Socket Events		
 		room.onNewMessage(function(message) {
+			_messages.push(message);
 			_notifyNewMessage(message);
 			_displayNewMessage(message);
 		});
@@ -118,6 +126,24 @@ App.Chat = (function(Api, User) {
 		});
 	}
 	
+	function _urlify(text) {
+		var urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?(\?([-a-zA-Z0-9@:%_\+.~#?&//=]+)|)/ig;
+		return text.replace(urlRegex, function(url) {
+			url = url.replace(/.*?:\/\//g, ''); // Strip protocol
+			return '<a href="//' + url + '" target="_blank">' + url + '</a>';
+		})
+	}
+	
+	function _updateMessageTimes() {
+		var $messages = DOM('[data-message-id]');
+		
+		$messages.each(function(el, i) {
+			var message = _messages[i];
+			DOM(el).find('time').html(moment(message.createdAt).fromNow());
+		});
+	}
+	
+	
 	function convertToNodes(string) {
 		var div = document.createElement('div');
 		div.innerHTML = string;
@@ -137,7 +163,7 @@ App.Chat = (function(Api, User) {
 	
 	function _createTextMessage(message) {
 		return DOM.renderTemplate(_settings.textMessageTemplate,{
-				message: message.content,
+				message: _urlify(message.content),
 				profileUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg',
 				postedAt: moment(message.createdAt).fromNow()
 		});
