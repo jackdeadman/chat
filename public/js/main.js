@@ -15,7 +15,8 @@ App.Chat = (function(Api, User) {
 		pageTitle: document.title,
 		textMessageTemplate: DOM('#message-template').html(),
 		editMessageTemplate: DOM('#edit-message-template').html(),
-		updateTimer: 1000
+		notificationDisplayLength: 2000,
+		updateTimer: 1000 // How often the times messages sent are updated (ms)
 	}
 	
 	var client;
@@ -198,8 +199,14 @@ App.Chat = (function(Api, User) {
 			icon: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg'
 		};
 		if (!_windowVisible) {
-			new Notification(title, options);
-			document.title = '('+ ++unreadMessages + ') '+_settings.pageTitle;
+			document.title = '('+ ++unreadMessages + ') '+ _settings.pageTitle;
+			var n = new Notification(title, options);
+			
+			n.onshow = function() {
+				setTimeout(function () {
+					n.close();
+				}, _settings.notificationDisplayLength);
+			};
 		} 
 	}
 
