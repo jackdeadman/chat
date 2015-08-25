@@ -151,7 +151,7 @@ small {
         text-decoration: none; }
     .chat-container .messages .message:nth-child(2n) {
       width: 70%;
-      margin-left: 20%; }
+      margin-left: 25%; }
     .chat-container .messages .message:after {
       top: 50%;
       right: 100%;
