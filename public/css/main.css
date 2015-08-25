@@ -148,20 +148,6 @@ small {
       font-size: 4em;
       text-align: center;
       cursor: pointer; }
-    .chat-container .message-form textarea {
-      width: 90%;
-      max-width: 100%;
-      display: block;
-      font-size: inherit;
-      border: none;
-      padding: 10px;
-      resize: none;
-      outline: none;
-      margin: 0 20px;
-      background-color: #f7f7f7;
-      font-family: Helvetica, sans-serif;
-      font-size: 1.25em;
-      border-radius: 3px; }
     .chat-container .message-form .message-actions {
       width: 10%;
       margin: 0 10px; }
@@ -186,6 +172,21 @@ small {
 
 .btn-primary:active {
   background-color: #fff; }
+
+textarea.message-entry {
+  width: 90%;
+  max-width: 100%;
+  display: block;
+  font-size: inherit;
+  border: none;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  margin: 0 20px;
+  background-color: #f7f7f7;
+  font-family: Helvetica, sans-serif;
+  font-size: 1.25em;
+  border-radius: 3px; }
 
 ::-webkit-scrollbar {
   width: 12px; }
