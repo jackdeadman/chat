@@ -112,7 +112,7 @@ App.Chat = (function(Api, User) {
 			
 			if (node) {
 				e.preventDefault();
-				_editMessage(node.parentNode);
+				_editMessage(node.parentNode.parentNode);
 			}
 		});
 	}
@@ -138,6 +138,13 @@ App.Chat = (function(Api, User) {
 					// TODO: re-render whole message
 					DOM(node).find('.message-content').html(message.content);	
 				});	
+			});
+			
+			DOM(modal).find('.message-entry').on('keydown', function(e) {
+				if (e.keyCode === 13 && !e.shiftKey) {
+					e.preventDefault();
+					DOM(modal).find('.save').elements[0].click();
+				}
 			});
 			
 			// Add modal
