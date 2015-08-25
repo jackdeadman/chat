@@ -85,6 +85,7 @@ module.exports.updateMessage = function(io, socket, req, handle) {
 		else {
 			message.content = req.messageString;
 			handle(null, cleanMessages([message])[0]);
+			io.emit('messageEdited', cleanMessages([message])[0]);
 		}
 	});
 };
