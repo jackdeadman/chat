@@ -12,6 +12,8 @@
 		min-width: 100px;
 		margin: auto;
 		padding: 20px 40px;
+		background-color: #fff;
+		box-shadow: 0 2px 2px rgba(0,0,0,0.1);
 		
 		textarea {
 			margin: 10px 0;
@@ -95,6 +97,7 @@
 			font-size: 4em;
 			text-align: center;
 			cursor: pointer;
+			margin-bottom: 10px;
 		}
 		
 		.message-actions {

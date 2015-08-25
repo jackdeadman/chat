@@ -51,7 +51,7 @@ table {
 body {
   color: #444;
   font-family: helvetica, sans-serif;
-  background-color: #C3E3C5; }
+  background-color: #0082AD; }
 
 h1, .h1 {
   font-size: 5em; }
@@ -89,7 +89,9 @@ small {
     max-width: 50%;
     min-width: 100px;
     margin: auto;
-    padding: 20px 40px; }
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); }
     .modal .inner textarea {
       margin: 10px 0; }
 
@@ -149,7 +151,8 @@ small {
     .chat-container .message-form .smilies-btn {
       font-size: 4em;
       text-align: center;
-      cursor: pointer; }
+      cursor: pointer;
+      margin-bottom: 10px; }
     .chat-container .message-form .message-actions {
       width: 10%;
       margin: 0 10px; }
