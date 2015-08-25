@@ -68,6 +68,11 @@ App.Chat = (function(Api, User) {
 			window.location = '/';
 		});
 		
+		room.onMessageEdited(function(message) {
+			var $node = DOM('[data-message-id="' + message._id + '"]');
+			$node.find('.message-content').html(message.content);
+		});
+		
 		// DOM events
 		
 		window.onfocus = function() {
@@ -134,9 +139,7 @@ App.Chat = (function(Api, User) {
 						return;
 					}
 					// Remove modal
-					modal.parentNode.removeChild(modal);
-					// TODO: re-render whole message
-					DOM(node).find('.message-content').html(message.content);	
+					modal.parentNode.removeChild(modal);	
 				});	
 			});
 			
