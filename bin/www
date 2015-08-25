@@ -6,7 +6,8 @@
 
 var app = require('../app');
 var debug = require('debug')('express:server');
-var http = require('http');
+var https = require('https');
+var fs = require('fs');
 var mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err) {
@@ -24,10 +25,15 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
 
-var server = http.createServer(app);
+var options = {
+  key: fs.readFileSync('certs/server.key'),
+  cert: fs.readFileSync('certs/server.crt')
+};
+
+var server = https.createServer(options, app);
 /**
  * Listen on provided port, on all network interfaces.
  */
