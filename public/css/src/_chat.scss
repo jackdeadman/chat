@@ -12,6 +12,11 @@
 		min-width: 100px;
 		margin: auto;
 		padding: 20px 40px;
+		
+		textarea {
+			margin: 10px 0;
+		}
+		
 	}
 }
 
@@ -140,6 +145,11 @@ textarea.message-entry {
 	font-family: Helvetica, sans-serif;
 	font-size: $p-font-size;
 	border-radius: 3px;
+}
+
+.btn-primary.small {
+	width: 25%;
+	height: 40px;
 }
 
 // these only work in webkit browsers, unfortunately there seems to be no way to achieve the same effect

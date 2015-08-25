@@ -90,6 +90,8 @@ small {
     min-width: 100px;
     margin: auto;
     padding: 20px 40px; }
+    .modal .inner textarea {
+      margin: 10px 0; }
 
 .chat-container {
   width: 80%;
@@ -187,6 +189,10 @@ textarea.message-entry {
   font-family: Helvetica, sans-serif;
   font-size: 1.25em;
   border-radius: 3px; }
+
+.btn-primary.small {
+  width: 25%;
+  height: 40px; }
 
 ::-webkit-scrollbar {
   width: 12px; }
