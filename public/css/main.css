@@ -162,27 +162,30 @@ small {
       font-family: Helvetica, sans-serif;
       font-size: 1.25em;
       border-radius: 3px; }
-    .chat-container .message-form .send-message-btn {
-      width: 100%;
-      height: 60px;
-      background-color: #197DFF;
-      border: none;
-      border-radius: 3px;
-      color: #fff;
-      font-size: 1.1em;
-      border-bottom: 3px solid #0E468F;
-      transition: 0.5s ease background-color;
-      cursor: pointer; }
-      .chat-container .message-form .send-message-btn.disabled {
-        opacity: 0.3;
-        cursor: default; }
-    .chat-container .message-form .send-message-btn:active {
-      background-color: #fff; }
     .chat-container .message-form .message-actions {
       width: 10%;
       margin: 0 10px; }
-    .chat-container .message-form .send-message-btn:hover {
-      background-color: #3C8FFA; }
+
+.btn-primary {
+  width: 100%;
+  height: 60px;
+  background-color: #197DFF;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 1.1em;
+  border-bottom: 3px solid #0E468F;
+  transition: 0.5s ease background-color;
+  cursor: pointer; }
+  .btn-primary.disabled {
+    opacity: 0.3;
+    cursor: default; }
+
+.btn-primary:hover {
+  background-color: #3C8FFA; }
+
+.btn-primary:active {
+  background-color: #fff; }
 
 ::-webkit-scrollbar {
   width: 12px; }
