@@ -29,7 +29,7 @@ App.Chat = (function(Api, User) {
 	// Cache DOM:
 	var $container = DOM('.chat-container');
 	var $messagesContainer = $container.find('.messages');
-	var $messageForm = $container.find('.message-form textarea');
+	var $messageForm = $container.find('.message-form .message-entry');
 	var $messageButton = $container.find('.send-message-btn');
 
 	// Private:
@@ -107,7 +107,7 @@ App.Chat = (function(Api, User) {
 			
 			var node = _lookUpTree(e.target, function(element){
 				if (element.classList)
-					return element.classList.contains('edit');
+					return element.classList.contains('edit-message-btn');
 			});
 			
 			if (node) {
@@ -127,7 +127,7 @@ App.Chat = (function(Api, User) {
 			var modal = convertToNodes(modal);
 			
 			DOM(modal).find('.save').on('click', function() {
-				var message = DOM(modal).find('textarea').value();
+				var message = DOM(modal).find('.message-entry').value();
 				room.updateMessage(messageId, message, function(err, message){
 					if (err) {
 						console.log(err);

@@ -1,3 +1,10 @@
+@mixin word_wrap(){
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
+
 .modal {
 	position: fixed;
 	top: 0;
@@ -55,7 +62,42 @@
 			font-size: $message-font-size;
 			position: relative;
 			box-shadow: 0 3px #ccc;
-			word-wrap: break-word;
+			display: flex;
+			align-items: center;
+			
+			.user-image{
+				margin-right: 10px;
+				border-radius: 10%;
+			}
+			
+			.message-content{
+				@include word-wrap();
+			}
+			
+			.message-timestamp{
+				color: #7a7a7a;
+				font-style: italic;
+			}
+			
+			.edit-message-btn {
+				background-color: #e5e5e5;
+				padding: 5px;
+				width: 100px;
+				border-radius: 3px;
+				text-align: center;
+				transition: all ease 0.1s;
+				cursor: pointer;
+			}
+			
+			.edit-message-btn:hover {
+				background-color: #444;
+				color: #fff;
+			}
+			
+			.edit-message-btn a {
+				color: #7a7a7a;
+				text-decoration: none;
+			}
 		}
 		
 		.message:nth-child(2n) {

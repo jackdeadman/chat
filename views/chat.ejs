@@ -13,7 +13,7 @@
 			<div class="inner">
 				<h4>Editing Message</h4>
 				<textarea name="message-editor" class="message-entry" id="" cols="30" rows="10">{{message}}</textarea>
-				<button class="button btn-primary save small">Save</button>
+				<button class="save button btn-primary small">Save</button>
 			</div>
 		</div>
 	</script>
@@ -27,10 +27,14 @@
 		<ul class="messages">
 			<script id="message-template" type="text/template">
 				<li class="message">
-					<img src="{{profileUrl}}" alt="User picture">
-					<p class="message-content">{{message}}</p>
-					<time>{{postedAt}}</time>
-					<div class="edit"><a href="#">Edit</a></div>
+					<div class="user-image-container">
+						<img class="user-image" src="{{profileUrl}}" alt="User picture">
+					</div>
+					<div class="message-container">
+						<p class="message-content">{{message}}</p>
+						<time class="message-timestamp">{{postedAt}}</time>
+						<div class="edit-message-btn"><a href="#">Edit</a></div>
+					</div>
 				</li>
 			</script>
 		</ul>
