@@ -44,13 +44,14 @@ function cleanMessages(messages) {
 	for (var i=0; i<messages.length; i++) {
 		var message = messages[i];
 		message.sanatise();
+		message.convertNewLines();
 		message.renderLatex();
-		message.convertNewLines();	
 	}
 	
 	return messages;
 }
 
+module.exports.cleanMessages = cleanMessages;
 
 module.exports.getMessages = function(io, socket, req, handle) {
 	Room.findByPublicId(req.roomId, function(err, room) {
@@ -84,8 +85,9 @@ module.exports.updateMessage = function(io, socket, req, handle) {
 		if (err) handle(new Error('Failed to update message'));
 		else {
 			message.content = req.messageString;
-			handle(null, cleanMessages([message])[0]);
-			io.emit('messageEdited', cleanMessages([message])[0]);
+			cleanMessages([message]);
+			handle(null, message);
+			io.emit('messageEdited', message);
 		}
 	});
 };
