@@ -31,6 +31,7 @@ App.Chat = (function(Api, User) {
 	var $messagesContainer = $container.find('.messages');
 	var $messageForm = $container.find('.message-form .message-entry');
 	var $messageButton = $container.find('.send-message-btn');
+	var $collapseButton = $container.find('.collapse-message-entry');
 
 	// Private:
 	function _init() {
@@ -118,6 +119,24 @@ App.Chat = (function(Api, User) {
 			if (node) {
 				e.preventDefault();
 				_editMessage(node.parentNode.parentNode.parentNode);
+			}
+		});
+		
+		$collapseButton.on('click', function() {
+			var messageForm = $container.find('div.message-form');
+			var messageArea = $container.find('.messages');
+			
+			console.log("testing");
+			$collapseButton.elements[0].textContent = 'Expand';
+			
+			if( messageForm.elements[0].style.display === 'none') {
+				messageForm.elements[0].style.display = 'flex';
+				messageArea.elements[0].style.height = '400px';
+				$collapseButton.elements[0].textContent = 'Collapse';
+			}else{
+				messageForm.elements[0].style.display = 'none';
+				messageArea.elements[0].style.height = '600px';
+				
 			}
 		});
 	}

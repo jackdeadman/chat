@@ -5,6 +5,10 @@
 	hyphens: auto;
 }
 
+html {
+	height: 100%;
+}
+
 .modal {
 	position: fixed;
 	top: 0;
@@ -30,8 +34,7 @@
 }
 
 .chat-container {
-	
-	width: 100%;
+	width: 95%;
 	margin: 0 auto;
 	background-color: #d6d6d6;
 	box-shadow: 0 0 20px rgba(0,0,0,0.2);
@@ -79,6 +82,7 @@
 			.message-timestamp{
 				color: #7a7a7a;
 				font-style: italic;
+				display: none;
 			}
 			
 			.main-message{
@@ -97,7 +101,6 @@
 					transition: all ease 0.2s;
 					cursor: pointer;
 					margin-left: auto;
-					
 					max-height: 40px;
 				}
 				
@@ -118,7 +121,6 @@
 		
 		.message:nth-child(2n) {
 			width: 85%;
-			// margin-left: 10%;
 		}
 		
 		.message-container:after {
@@ -226,6 +228,12 @@ textarea.message-entry {
 	border: 3px solid rgba(0,0,0,0.2);
 	border-radius: 3px;
 	padding: 7px 10px;
+	cursor: pointer;
+}
+
+.chat-footer {
+	background-color: #e5e5e5;
+	padding: 5px;
 }
 
 // these only work in webkit browsers, unfortunately there seems to be no way to achieve the same effect

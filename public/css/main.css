@@ -77,6 +77,9 @@ input {
 small {
   font-size: 0.75em; }
 
+html {
+  height: 100%; }
+
 .modal {
   position: fixed;
   top: 0;
@@ -96,7 +99,7 @@ small {
       margin: 10px 0; }
 
 .chat-container {
-  width: 100%;
+  width: 95%;
   margin: 0 auto;
   background-color: #d6d6d6;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
@@ -132,7 +135,8 @@ small {
       width: 100%; }
       .chat-container .messages .message-container .message-timestamp {
         color: #7a7a7a;
-        font-style: italic; }
+        font-style: italic;
+        display: none; }
       .chat-container .messages .message-container .main-message {
         display: flex; }
         .chat-container .messages .message-container .main-message .message-content {
@@ -237,7 +241,12 @@ textarea.message-entry {
   background-color: #fff;
   border: 3px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  padding: 7px 10px; }
+  padding: 7px 10px;
+  cursor: pointer; }
+
+.chat-footer {
+  background-color: #e5e5e5;
+  padding: 5px; }
 
 ::-webkit-scrollbar {
   width: 12px; }
