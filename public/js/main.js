@@ -117,7 +117,7 @@ App.Chat = (function(Api, User) {
 			
 			if (node) {
 				e.preventDefault();
-				_editMessage(node.parentNode.parentNode);
+				_editMessage(node.parentNode.parentNode.parentNode);
 			}
 		});
 	}

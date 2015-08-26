@@ -31,20 +31,24 @@
 						<img class="user-image" src="{{profileUrl}}" alt="User picture">
 					</div>
 					<div class="message-container">
-						<p class="message-content">{{message}}</p>
+						<div class="main-message">
+							<p class="message-content">{{message}}</p>
+							<div class="edit-message-btn"><a href="#">Edit</a></div>
+						</div>
 						<time class="message-timestamp">{{postedAt}}</time>
-						<div class="edit-message-btn"><a href="#">Edit</a></div>
 					</div>
+					
 				</li>
 			</script>
 		</ul>
 		
 		<div class="message-form">
+			<button class="collapse-message-entry btn-secondary">&#9660;</button>
 			<textarea name="message" class="message-entry" cols="30" rows="5"></textarea>
 			<div class="message-actions">
 				<!--temp-->
 				<div class="smilies-btn">😄</div>
-				<button class="send-message-btn btn-primary disabled">Send</button>
+				<button class="send-message-btn btn-primary disabled large">Send</button>
 			</div>
 		</div>
 		
