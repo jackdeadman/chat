@@ -77,9 +77,6 @@ input {
 small {
   font-size: 0.75em; }
 
-html {
-  height: 100%; }
-
 .modal {
   position: fixed;
   top: 0;
@@ -100,17 +97,19 @@ html {
 
 .chat-container {
   width: 95%;
+  height: 100vh;
   margin: 0 auto;
   background-color: #d6d6d6;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); }
   .chat-container header {
     padding: 1em 3em;
-    background-color: #74F2AB; }
+    background-color: #74F2AB;
+    height: 10%; }
     .chat-container header .title {
       font-size: 1.2em;
       font-weight: bold; }
   .chat-container .messages {
-    height: 400px;
+    height: 53%;
     overflow-y: scroll;
     background-color: #e5e5e5; }
     .chat-container .messages .message {
@@ -161,7 +160,7 @@ html {
     .chat-container .messages .message:nth-child(2n) {
       width: 85%; }
     .chat-container .messages .message-container:after {
-      top: 90%;
+      top: 80px;
       right: 100%;
       border: solid transparent;
       content: " ";
@@ -174,6 +173,7 @@ html {
       border-width: 0 20px 20px 0;
       margin-top: -20px; }
   .chat-container .message-form {
+    height: 30%;
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -245,7 +245,8 @@ textarea.message-entry {
 
 .chat-footer {
   background-color: #e5e5e5;
-  padding: 5px; }
+  padding: 5px;
+  height: 7%; }
 
 ::-webkit-scrollbar {
   width: 12px; }

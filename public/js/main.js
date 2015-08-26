@@ -131,12 +131,11 @@ App.Chat = (function(Api, User) {
 			
 			if( messageForm.elements[0].style.display === 'none') {
 				messageForm.elements[0].style.display = 'flex';
-				messageArea.elements[0].style.height = '400px';
+				messageArea.elements[0].style.height = '53%';
 				$collapseButton.elements[0].textContent = 'Collapse';
 			}else{
 				messageForm.elements[0].style.display = 'none';
-				messageArea.elements[0].style.height = '600px';
-				
+				messageArea.elements[0].style.height = '83%';
 			}
 		});
 	}
