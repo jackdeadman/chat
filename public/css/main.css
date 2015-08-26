@@ -111,8 +111,15 @@ small {
     overflow-y: scroll;
     background-color: #e5e5e5; }
     .chat-container .messages .message {
-      width: 80%;
+      display: flex;
+      width: 95%;
       margin: 15px 10%;
+      margin-left: 5%; }
+      .chat-container .messages .message .user-image {
+        margin-right: 10px;
+        border-radius: 10%;
+        max-height: 50px; }
+    .chat-container .messages .message-container {
       margin-bottom: 10px;
       padding: 0.5em 1.5em;
       background-color: #fff;
@@ -121,21 +128,16 @@ small {
       font-size: 1.1em;
       position: relative;
       box-shadow: 0 3px #ccc;
-      display: flex;
-      align-items: center; }
-      .chat-container .messages .message .user-image {
-        margin-right: 10px;
-        border-radius: 10%;
-        max-height: 50px; }
-      .chat-container .messages .message .message-content {
+      width: 85%; }
+      .chat-container .messages .message-container .message-content {
         word-break: break-word;
         -webkit-hyphens: auto;
         -moz-hyphens: auto;
         hyphens: auto; }
-      .chat-container .messages .message .message-timestamp {
+      .chat-container .messages .message-container .message-timestamp {
         color: #7a7a7a;
         font-style: italic; }
-      .chat-container .messages .message .edit-message-btn {
+      .chat-container .messages .message-container .edit-message-btn {
         background-color: #e5e5e5;
         padding: 5px;
         width: 100px;
@@ -143,17 +145,17 @@ small {
         text-align: center;
         transition: all ease 0.1s;
         cursor: pointer; }
-      .chat-container .messages .message .edit-message-btn:hover {
+      .chat-container .messages .message-container .edit-message-btn:hover {
         background-color: #444;
         color: #fff; }
-      .chat-container .messages .message .edit-message-btn a {
+      .chat-container .messages .message-container .edit-message-btn a {
         color: #7a7a7a;
         text-decoration: none; }
     .chat-container .messages .message:nth-child(2n) {
-      width: 70%;
-      margin-left: 25%; }
-    .chat-container .messages .message:after {
-      top: 50%;
+      width: 85%;
+      margin-left: 10%; }
+    .chat-container .messages .message-container:after {
+      top: 70%;
       right: 100%;
       border: solid transparent;
       content: " ";
@@ -165,11 +167,6 @@ small {
       border-right-color: #fff;
       border-width: 20px;
       margin-top: -20px; }
-    .chat-container .messages .message:nth-child(2n):after {
-      left: 100%;
-      border-right-color: rgba(255, 255, 255, 0);
-      border-left-color: #fff;
-      margin-right: -500px; }
   .chat-container .message-form {
     position: relative;
     display: flex;

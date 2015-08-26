@@ -51,9 +51,20 @@
 		overflow-y: scroll;
 		background-color: #e5e5e5;
 		
-		.message {
-			width: 80%;
+		.message{
+			display: flex;
+			width: 95%;
 			margin: 15px 10%;
+			margin-left: 5%;
+			
+			.user-image{
+				margin-right: 10px;
+				border-radius: 10%;
+				max-height: 50px;
+			}
+		}
+		
+		.message-container {
 			margin-bottom: 10px;
 			padding: 0.5em 1.5em;
 			background-color: #fff;
@@ -62,14 +73,7 @@
 			font-size: $message-font-size;
 			position: relative;
 			box-shadow: 0 3px #ccc;
-			display: flex;
-			align-items: center;
-			
-			.user-image{
-				margin-right: 10px;
-				border-radius: 10%;
-				max-height: 50px;
-			}
+			width: 85%;
 			
 			.message-content{
 				@include word-wrap();
@@ -102,12 +106,12 @@
 		}
 		
 		.message:nth-child(2n) {
-			width: 70%;
-			margin-left: 25%;
+			width: 85%;
+			margin-left: 10%;
 		}
 		
-		.message:after {
-			top: 50%;
+		.message-container:after {
+			top: 70%;
 			right: 100%;
 			border: solid transparent;
 			content: " ";
@@ -119,13 +123,6 @@
 			border-right-color: #fff;
 			border-width: 20px;
 			margin-top: -20px;
-		}
-		
-		.message:nth-child(2n):after{
-			left: 100%;
-			border-right-color: rgba(255,255,255,0);
-			border-left-color: #fff;
-			margin-right: -500px;
 		}
 		
 	}
