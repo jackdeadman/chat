@@ -5,6 +5,7 @@
 	<title>Chat</title>
 	<link rel="stylesheet" href="/css/katex.min.css">
 	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/ionicons.css">
 </head>
 <body>
 	
@@ -33,7 +34,7 @@
 					<div class="message-container">
 						<div class="main-message">
 							<p class="message-content">{{message}}</p>
-							<div class="edit-message-btn"><a href="#">Edit</a></div>
+							<div class="edit-message-btn"><a href="#"><i class="ionicons ion-edit"></i></a></div>
 						</div>
 						<time class="message-timestamp">{{postedAt}}</time>
 					</div>
@@ -42,7 +43,7 @@
 			</script>
 		</ul>
 		<div class="chat-footer">
-			<button class="collapse-message-entry btn-secondary">Collapse</button>
+			<button class="collapse-message-entry btn-secondary"><i class="ionicons ion-arrow-shrink"></i></button>
 		</div>
 		
 		<div class="message-form">

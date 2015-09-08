@@ -126,16 +126,13 @@ App.Chat = (function(Api, User) {
 			var messageForm = $container.find('div.message-form');
 			var messageArea = $container.find('.messages');
 			
-			console.log("testing");
-			$collapseButton.elements[0].textContent = 'Expand';
-			
 			if( messageForm.elements[0].style.display === 'none') {
 				messageForm.elements[0].style.display = 'flex';
-				messageArea.elements[0].style.height = '53%';
-				$collapseButton.elements[0].textContent = 'Collapse';
+				messageArea.elements[0].classList.remove('messages-expanded');
+				messageArea.elements[0].classList.add('messages');
 			}else{
 				messageForm.elements[0].style.display = 'none';
-				messageArea.elements[0].style.height = '83%';
+				messageArea.elements[0].classList.add('messages-expanded');
 			}
 		});
 	}
