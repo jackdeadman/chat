@@ -1,6 +1,8 @@
 var chatController = require('./controllers/chat');
 
 function bindClient(io,socket) {
+	var defaultCallback = function() {};
+	
 	socket.on('entered', function(req) {
 		// Tell everyone else that someone has entered
 		socket.join(req.roomId);
@@ -8,19 +10,23 @@ function bindClient(io,socket) {
 	});
 	
 	socket.on('requestMessages', function(req, handle) {
-		chatController.getMessages(io, socket, req, handle);
+		chatController.getMessages(io, socket, req, handle || defaultCallback);
 	});
 	
 	socket.on('requestMessage', function(req, handle) {
-		chatController.getMessage(io, socket, req, handle);
+		chatController.getMessage(io, socket, req, handle || defaultCallback);
 	});
 	
 	socket.on('newMessage', function(req, handle) {
-		chatController.sendMessage(io, socket, req, handle);
+		chatController.sendMessage(io, socket, req, handle || defaultCallback);
 	});
 	
 	socket.on('updateMessage', function(req, handle) {
-		chatController.updateMessage(io, socket, req, handle);
+		chatController.updateMessage(io, socket, req, handle || defaultCallback);
+	});
+	
+	socket.on('changeTopic', function(req, handle) {
+		chatController.changeTopic(io, socket, req, handle || defaultCallback);
 	});
 }
 // Add names rooms/namespaces

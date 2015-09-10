@@ -13,7 +13,9 @@ module.exports.loadChat = function(req, res, next) {
 	
 	Room.count({_id: id}, function(err, count) {
 		if (count === 1) {
-			res.render('chat', {title: 'Chat'});    
+			this.findOne({_id: id}, function(err, col) {
+				res.render('chat', {title: col.topic});
+			});    
 		} else {
 			res.status(404);
 			res.send('No chat found');
@@ -113,8 +115,21 @@ module.exports.sendMessage = function(io, socket, req, handle) {
 	}
 	saveMessage(req, function(err, message) {
 		if (err) handle(new Error("Failed to save message"));
-		
-		handle(null);
-		io.to(req.roomId).emit('newMessage', cleanMessages([message])[0]);
+		else {
+			handle(null);
+			io.to(req.roomId).emit('newMessage', cleanMessages([message])[0]);	
+		}
 	});
 }
+
+module.exports.changeTopic = function(io, socket, req, handle) {
+	Room.findByPublicId(req.roomId, function(err, doc) {
+		this.update({_id:doc._id}, {topic: req.topic}, function(err, doc) {
+			if (err) handle(new Error('Failed to update topic'));
+			else {
+				handle(null);
+				io.to(req.roomId).emit('topicUpdated', req.topic);
+			}
+		});
+	});
+};

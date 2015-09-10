@@ -42,9 +42,12 @@ App.Api = (function() {
 	};
 	
 	Room.prototype.onMessageEdited = function(callback) {
-		console.log('hello');
 		_socket.on('messageEdited', callback);
 	};
+	
+	Room.prototype.onTopicUpdated = function(callback) {
+		_socket.on('topicUpdated', callback);
+	}
 
 	// Local user has stopped typing
 	Room.prototype.userHasStoppedTyping = function() {
@@ -55,6 +58,13 @@ App.Api = (function() {
 	
 	Room.prototype.enter = function(handle) {
 		_socket.emit('entered', {roomId: this.roomId});
+	};
+	
+	Room.prototype.changeTopic = function(topic, handle) {
+		_socket.emit('changeTopic', {
+			roomId: this.roomId,
+			topic: topic
+		}, handle);
 	};
 	
 	Room.prototype.getMessages = function(start, amount, handle) {

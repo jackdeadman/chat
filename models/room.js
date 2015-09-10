@@ -17,7 +17,6 @@ var RoomSchema = new Schema({
 
 RoomSchema.statics.findByPublicId = function(id, handle) {
 	var actualId = hashids.decodeHex(id);
-	console.log(actualId);
 	this.findOne({_id: actualId}, handle);
 };
 

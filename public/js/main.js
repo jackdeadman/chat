@@ -32,6 +32,7 @@ App.Chat = (function(Api, User) {
 	var $messageForm = $container.find('.message-form .message-entry');
 	var $messageButton = $container.find('.send-message-btn');
 	var $collapseButton = $container.find('.collapse-message-entry');
+	var $title = $container.find('header');
 
 	// Private:
 	function _init() {
@@ -74,6 +75,11 @@ App.Chat = (function(Api, User) {
 			$node.find('.message-content').html(message.content);
 		});
 		
+		room.onTopicUpdated(function(topic) {
+			$title.find('.title').html(topic);
+			_settings.pageTitle = topic;
+		});
+		
 		// DOM events
 		
 		window.onfocus = function() {
@@ -85,6 +91,10 @@ App.Chat = (function(Api, User) {
 		window.onblur = function() {
 			_windowVisible = false;
 		};
+		
+		$title.on('click', function() {
+			changeChatTopic(prompt("Please enter a topic: "));
+		});
 		
 		$messageForm.on('keydown', function(e) {
 			room.userIsTyping();
@@ -281,12 +291,18 @@ App.Chat = (function(Api, User) {
 			room.sendMessage(message, _handleMessageAck);	
 		}
 	}
-		
+	
+	function changeChatTopic(topic) {
+		room.changeTopic(topic, function(err){
+			if (err) alert(err);
+		});
+	}
 	
 	_init();
 	return {
 		VERSION: VERSION,
-		sendMessage: sendMessage
+		sendMessage: sendMessage,
+		changeChatTopic: changeChatTopic
 	}
 		
 })(App.Api, App.User);
