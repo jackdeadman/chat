@@ -117,7 +117,7 @@ small {
     .chat-container .messages .message, .chat-container .messages-expanded .message {
       display: flex;
       width: 90%;
-      margin: 15px 0;
+      margin: 10px 0;
       margin-left: 5%; }
       .chat-container .messages .message .user-image, .chat-container .messages-expanded .message .user-image {
         margin-right: 10px;
@@ -129,7 +129,7 @@ small {
       padding-right: 0.5em;
       background-color: #fff;
       border-radius: 3px;
-      line-height: 1.6em;
+      line-height: 0.6em;
       font-size: 1.1em;
       position: relative;
       box-shadow: 0 3px #ccc;
@@ -165,7 +165,7 @@ small {
     .chat-container .messages .message:nth-child(2n), .chat-container .messages-expanded .message:nth-child(2n) {
       width: 85%; }
     .chat-container .messages .message-container:after, .chat-container .messages-expanded .message-container:after {
-      top: 80px;
+      top: 50px;
       right: 100%;
       border: solid transparent;
       content: " ";
@@ -175,8 +175,8 @@ small {
       pointer-events: none;
       border-color: rgba(255, 255, 255, 0);
       border-right-color: #fff;
-      border-width: 0 20px 20px 0;
-      margin-top: -20px; }
+      border-width: 0 15px 15px 0;
+      margin-top: -15px; }
   .chat-container .messages-expanded {
     height: 88%; }
   .chat-container .message-form {
