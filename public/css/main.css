@@ -240,6 +240,10 @@ textarea.message-entry {
   font-size: 1em;
   border-radius: 3px; }
 
+textarea.message-entry:focus {
+  outline: 2px solid #CAF0FC;
+  background-color: #E8F9FF; }
+
 .btn-primary.small {
   width: 25%;
   height: 40px; }
@@ -253,7 +257,7 @@ textarea.message-entry {
 
 .chat-footer {
   background-color: #e5e5e5;
-  padding: 5px;
+  padding: 2px 5px;
   height: 7%; }
 
 ::-webkit-scrollbar {
