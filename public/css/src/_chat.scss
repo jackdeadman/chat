@@ -50,7 +50,7 @@
 	}
 
 	.messages {
-		height: 63%;
+		height: 70%;
 		overflow-y: scroll;
 		background-color: #f2f2f2;
 
@@ -145,7 +145,7 @@
 
 	.messages-expanded {
 		@extend .messages;
-		height: 83%;
+		height: 90%;
 	}
 
 	.message-form {
@@ -245,11 +245,12 @@ textarea.message-entry:focus{
 	cursor: pointer;
 }
 
-.chat-footer {
-	background-color: #e5e5e5;
-	padding: 2px 5px;
-	height: 7%;
-}
+//Don't think this feature is really necessary.
+// .chat-footer {
+// 	background-color: #e5e5e5;
+// 	padding: 2px 5px;
+// 	height: 7%;
+// }
 
 // these only work in webkit browsers, unfortunately there seems to be no way to achieve the same effect
 // in gecko, until Mozilla does something about that (which they haven't for several years...)

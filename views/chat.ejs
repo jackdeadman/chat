@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/css/ionicons.css">
 </head>
 <body>
-	
+
 	<script id="edit-message-template" type="text/template">
 		<div class="modal">
 			<div class="inner">
@@ -18,16 +18,16 @@
 			</div>
 		</div>
 	</script>
-	
+
 	<div class="chat-container">
-		
+
 		<header>
 			<div class="title">
 				<%= title %>
 			</div>
 			<i class="ionicons ion-edit"></i>
 		</header>
-		
+
 		<ul class="messages">
 			<script id="message-template" type="text/template">
 				<li class="message">
@@ -41,16 +41,18 @@
 						</div>
 						<time class="message-timestamp">{{postedAt}}</time>
 					</div>
-					
+
 				</li>
 			</script>
 		</ul>
-		<div class="chat-footer">
-			<button class="collapse-message-entry btn-secondary"><i class="ionicons ion-arrow-shrink"></i></button>
-		</div>
 		
+		<!--Leaving this feature commented out, don't think it's necessary.-->
+		<!-- <div class="chat-footer">
+			<button class="collapse-message-entry btn-secondary"><i class="ionicons ion-arrow-shrink"></i></button>
+		</div> -->
+
 		<div class="message-form">
-			
+
 			<textarea name="message" class="message-entry" cols="30" rows="5"></textarea>
 			<div class="message-actions">
 				<!--temp-->
@@ -58,7 +60,7 @@
 				<button class="send-message-btn btn-primary disabled large">Send</button>
 			</div>
 		</div>
-		
+
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/dom.min.js"></script>

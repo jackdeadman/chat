@@ -31,7 +31,7 @@ App.Chat = (function(Api, User) {
 	var $messagesContainer = $container.find('.messages');
 	var $messageForm = $container.find('.message-form .message-entry');
 	var $messageButton = $container.find('.send-message-btn');
-	var $collapseButton = $container.find('.collapse-message-entry');
+	// var $collapseButton = $container.find('.collapse-message-entry');
 	var $title = $container.find('header');
 
 	// Private:
@@ -132,19 +132,19 @@ App.Chat = (function(Api, User) {
 			}
 		});
 		
-		$collapseButton.on('click', function() {
-			var messageForm = $container.find('div.message-form');
-			var messageArea = $container.find('.messages');
+		// $collapseButton.on('click', function() {
+		// 	var messageForm = $container.find('div.message-form');
+		// 	var messageArea = $container.find('.messages');
 			
-			if( messageForm.elements[0].style.display === 'none') {
-				messageForm.elements[0].style.display = 'flex';
-				messageArea.elements[0].classList.remove('messages-expanded');
-				messageArea.elements[0].classList.add('messages');
-			}else{
-				messageForm.elements[0].style.display = 'none';
-				messageArea.elements[0].classList.add('messages-expanded');
-			}
-		});
+		// 	if( messageForm.elements[0].style.display === 'none') {
+		// 		messageForm.elements[0].style.display = 'flex';
+		// 		messageArea.elements[0].classList.remove('messages-expanded');
+		// 		messageArea.elements[0].classList.add('messages');
+		// 	}else{
+		// 		messageForm.elements[0].style.display = 'none';
+		// 		messageArea.elements[0].classList.add('messages-expanded');
+		// 	}
+		// });
 	}
 	
 	function _editMessage(node) {
