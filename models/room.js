@@ -10,7 +10,7 @@ var RoomSchema = new Schema({
 	topic: {
 		type: String,
 		required: true,
-		default: 'No Topic'	
+		default: 'Enter a topic here...'	
 	}
 	
 });
