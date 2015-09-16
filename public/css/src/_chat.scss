@@ -31,8 +31,8 @@
 
 .chat-container {
 	width: 95%;
-	height: 90vh;
-	margin: 20px auto;
+	height: 95vh;
+	margin: 2.5vh auto;
 	box-shadow: 0 0 20px rgba(0,0,0,0.5);
 
 	header {
@@ -41,7 +41,7 @@
 		padding: 5px;
 		display: flex;
 		align-items: center;
-		
+
 		.title {
 			padding: 0.25em 0.5em;
 			font-size: 1.2em;
@@ -100,12 +100,12 @@
 					transition: all ease 0.2s;
 					cursor: pointer;
 					margin-left: auto;
-					max-height: 40px;
+					max-height: 30px;
 				}
 
 				.edit-message-btn:hover {
 					background-color: #444;
-					
+
 					a {
 						color: #fff;
 					}
@@ -142,10 +142,10 @@
 		}
 
 	}
-	
+
 	.messages-expanded {
 		@extend .messages;
-		height: 88%;
+		height: 83%;
 	}
 
 	.message-form {
@@ -199,7 +199,7 @@
 
 .btn-primary.large {
 	width: 100%;
-	height: 60px;
+	height: 40px;
 }
 
 
@@ -247,7 +247,7 @@ textarea.message-entry:focus{
 
 .chat-footer {
 	background-color: #e5e5e5;
-	padding: 2px 5px; 
+	padding: 2px 5px;
 	height: 7%;
 }
 
