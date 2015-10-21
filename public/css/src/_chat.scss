@@ -222,15 +222,14 @@ textarea.message-entry {
 	resize: none;
 	outline: none;
 	margin: 0 20px;
-	background-color: #fff;
-	font-family: Helvetica, sans-serif;
+	background-color: #e5e5e5;
+	font-family: $font;
 	font-size: $input-font-size;
 	border-radius: 3px;
 }
 
 textarea.message-entry:focus{
-	outline: 2px solid #CAF0FC;
-	background-color: #E8F9FF;
+	background-color: #fff;
 }
 
 .btn-primary.small {
