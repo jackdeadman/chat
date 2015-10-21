@@ -93,7 +93,11 @@ App.Chat = (function(Api, User) {
 		};
 		
 		$title.on('click', function() {
-			changeChatTopic(prompt("Please enter a topic: "));
+			var input = prompt("Please enter a topic: ");
+			//check whether user clicks cancel, if so do nothing, otherwise change the topic.
+			if (input != null){
+				changeChatTopic(input);
+			}
 		});
 		
 		$messageForm.on('keydown', function(e) {
