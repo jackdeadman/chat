@@ -270,7 +270,7 @@ App.Chat = (function(Api, User) {
 	
 	function _handleMessageAck(err) {
 		if(err) {
-			alert('Error');
+			alert('Message failed to send.');
 		} else {
 			// alert('success');
 		}
