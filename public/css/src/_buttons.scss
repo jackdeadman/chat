@@ -1,0 +1,59 @@
+.btn-primary {
+	background-color: #197DFF;
+	border: none;
+	border-radius: 3px;
+	color: #fff;
+	font-size: $message-font-size;
+	border-bottom: 3px solid #0E468F;
+	transition: 0.5s ease background-color;
+	cursor: pointer;
+
+	&.disabled {
+		opacity: 0.3;
+		cursor: default;
+	}
+}
+
+.btn-primary.large {
+	width: 100%;
+	height: 35px;
+}
+
+.btn-primary.small {
+	width: 25%;
+	height: 40px;
+}
+
+.btn-primary:hover {
+	background-color: #3C8FFA;
+}
+
+.btn-primary:active {
+	background-color: #fff;
+}
+
+.edit-message-btn {
+	background-color: #e5e5e5;
+	padding: 5px;
+	min-width: 50px;
+	border-radius: 3px;
+	text-align: center;
+	transition: all ease 0.2s;
+	cursor: pointer;
+	margin-left: auto;
+	max-height: 25px;
+}
+
+.edit-message-btn:hover {
+	background-color: #444;
+
+	a {
+		color: #fff;
+	}
+}
+
+.edit-message-btn a {
+	color: #7a7a7a;
+	text-decoration: none;
+	font-weight: bold;
+}
