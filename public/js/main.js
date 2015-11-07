@@ -30,14 +30,9 @@ App.Chat = (function(Api, User) {
 	var $container = DOM('.chat-container');
 	var $messagesContainer = $container.find('.messages');
 	var $messageForm = $container.find('.message-entry');
-    console.log($messageForm);
 	var $messageButton = $container.find('.send-message-btn');
-    console.log($messageButton);
-	// var $collapseButton = $container.find('.collapse-message-entry');
 	var $title = $container.find('header');
-    
-   
-
+  
 	// Private:
 	function _init() {
 		$messagesContainer.html('');
@@ -113,19 +108,15 @@ App.Chat = (function(Api, User) {
 			}
 		});
 		
-		$messageForm.on('input', function() {
-			var node = $messageButton.elements[0];
-
-			if (this.value === '') 
-				node.classList.add('disabled');
-			else
-				node.classList.remove('disabled');
-		});
+        $messageForm.on('input', function(){
+            var node = $messageButton.elements[0];
+            _disableButtonOnEmpty($messageForm, node);
+        });
 		
 		$messageButton.on('click', function() {
-            console.log($container.find('.message-entry').html());
 			if ($messageForm.html() !== '')
 				sendMessage();
+                _disableButtonOnEmpty($messageForm, $messageButton.elements[0]);
 		});
 		
 		$messagesContainer.on('click', function(e) {
@@ -140,21 +131,15 @@ App.Chat = (function(Api, User) {
 				_editMessage(node.parentNode.parentNode.parentNode);
 			}
 		});
-		
-		// $collapseButton.on('click', function() {
-		// 	var messageForm = $container.find('div.message-form');
-		// 	var messageArea = $container.find('.messages');
-			
-		// 	if( messageForm.elements[0].style.display === 'none') {
-		// 		messageForm.elements[0].style.display = 'flex';
-		// 		messageArea.elements[0].classList.remove('messages-expanded');
-		// 		messageArea.elements[0].classList.add('messages');
-		// 	}else{
-		// 		messageForm.elements[0].style.display = 'none';
-		// 		messageArea.elements[0].classList.add('messages-expanded');
-		// 	}
-		// });
 	}
+    
+    function _disableButtonOnEmpty(inputField, button){
+        if (inputField.html() == ''){
+                button.classList.add('disabled');
+            }else{
+                button.classList.remove('disabled');
+        }
+    }
 	
 	function _editMessage(node) {
 		var messageId = node.dataset.messageId;
