@@ -63,8 +63,8 @@
 }
 
 .messages {
-	height: 83%;
-	overflow-y: scroll;
+	height: calc(100% - 40px - 100px);
+	overflow: auto;
 	background-color: #f2f2f2;
 }
 
@@ -121,12 +121,8 @@
 	margin-top: -15px;
 }
 
-.messages-expanded {
-	@extend .messages;
-	height: 90%;
-}
-
 .message-form {
+    height: 100px;
 	position: relative;
 	display: flex;
 	align-items: flex-end;
@@ -160,20 +156,4 @@
 
 .message-entry:focus{
 	background-color: #fff;
-}
-
-// these only work in webkit browsers, unfortunately there seems to be no way to achieve the same effect
-// in gecko, until Mozilla does something about that (which they haven't for several years...)
-
-::-webkit-scrollbar {
-	width: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 2px;
-	background-color: #949494;
-}
-
-::-webkit-scrollbar-track {
-	background-color: #dedede;
 }

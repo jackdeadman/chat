@@ -1,0 +1,15 @@
+// these only work in webkit browsers, unfortunately there seems to be no way to achieve the same effect
+// in gecko, until Mozilla does something about that (which they haven't for several years...)
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 2px;
+	background-color: #949494;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #dedede;
+}
