@@ -29,10 +29,14 @@ App.Chat = (function(Api, User) {
 	// Cache DOM:
 	var $container = DOM('.chat-container');
 	var $messagesContainer = $container.find('.messages');
-	var $messageForm = $container.find('.message-form .message-entry');
+	var $messageForm = $container.find('.message-entry');
+    console.log($messageForm);
 	var $messageButton = $container.find('.send-message-btn');
+    console.log($messageButton);
 	// var $collapseButton = $container.find('.collapse-message-entry');
 	var $title = $container.find('header');
+    
+   
 
 	// Private:
 	function _init() {
@@ -119,7 +123,8 @@ App.Chat = (function(Api, User) {
 		});
 		
 		$messageButton.on('click', function() {
-			if ($messageForm.value() !== '')
+            console.log($container.find('.message-entry').html());
+			if ($messageForm.html() !== '')
 				sendMessage();
 		});
 		
@@ -289,8 +294,8 @@ App.Chat = (function(Api, User) {
 	// Public:
 	function sendMessage(message) {
 		if (typeof message === 'undefined') {
-			room.sendMessage($messageForm.value(), _handleMessageAck);
-			$messageForm.value('');	
+			room.sendMessage($messageForm.html(), _handleMessageAck);
+			$messageForm.html('');	
 		} else {
 			room.sendMessage(message, _handleMessageAck);	
 		}
