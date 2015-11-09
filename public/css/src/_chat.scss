@@ -86,6 +86,22 @@
 	width: 100%;
 }
 
+.message-shadow-red {
+	box-shadow: 0 3px red;
+}
+
+.message-shadow-blue {
+	box-shadow: 0 3px blue;
+}
+
+.message-shadow-green {
+	box-shadow: 0 3px green;
+}
+
+.message-shadow-orange {
+	box-shadow: 0 3px orange;
+}
+
 .main-message{
     display: flex;
 }

@@ -210,10 +210,17 @@ App.Chat = (function(Api, User) {
 	}
 	
 	function _createTextMessage(message) {
+		var userColor = "blue";
+		if (message.posted_by === currentUser.hash) {
+			userColor = "red"
+		} else {
+			userColor = "blue"
+		}
 		return DOM.renderTemplate(_settings.textMessageTemplate,{
 				message: _urlify(message.content),
 				profileUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg',
-				postedAt: moment(message.createdAt).fromNow()
+				postedAt: moment(message.createdAt).fromNow(),
+				color: userColor
 		});
 	}
 	
@@ -282,7 +289,7 @@ App.Chat = (function(Api, User) {
 			room.sendMessage($messageForm.html(), _handleMessageAck);
 			$messageForm.html('');	
 		} else {
-			room.sendMessage(message, _handleMessageAck);	
+			room.sendMessage(message, _handleMessageAck);
 		}
 	}
 	
