@@ -37,6 +37,7 @@ App.Api = (function() {
 	// Events
 	Room.prototype.onNewMessage = function(handle) {
 		_socket.on('newMessage', function(message) {
+			console.log(message);
 			handle.call(this, message);
 		});
 	};
@@ -89,8 +90,9 @@ App.Api = (function() {
 	Room.prototype.sendMessage = function(messageString, callback) {
 		var message = {
 			messageString: messageString,
+			userId: 122,
 			roomId: this.roomId
-		}
+		};
 		_socket.emit('newMessage', message, callback);
 	}
 	
