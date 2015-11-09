@@ -220,7 +220,8 @@ App.Chat = (function(Api, User) {
 				message: _urlify(message.content),
 				profileUrl: 'https://s3.amazonaws.com/uifaces/faces/twitter/chadengle/128.jpg',
 				postedAt: moment(message.createdAt).fromNow(),
-				color: userColor
+				color: userColor,
+				user: message.posted_by
 		});
 	}
 	
